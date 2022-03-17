@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import django_heroku
+#import django_heroku
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,7 +140,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-django_heroku.settings(locals())
+if 'HEROKU' in os.environ:
+    import django_heroku
+    django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
