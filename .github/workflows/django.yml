@@ -1,5 +1,7 @@
 name: Django CI
 
+on: [push]
+
 jobs:
   build:
 
@@ -22,4 +24,4 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-source: https://github.com/uva-cs3240-f21/Staff-Build-Example/blob/main/.github/workflows/django.ym
+source: https://github.com/uva-cs3240-f21/Staff-Build-Example/blob/main/.github/workflows/django.yml
