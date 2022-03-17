@@ -1,27 +1,11 @@
-name: Django CI
-
+name: GitHub Actions Test
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.9]
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
-#source: https://github.com/uva-cs3240-f21/Staff-Build-Example/blob/main/.github/workflows/django.yml
+      - name: Run tests
+      working-directory: ../../
+        run: |
+         python manage.py test
+#source: https://docs.github.com/en/actions/quickstart
