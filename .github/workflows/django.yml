@@ -6,6 +6,5 @@ jobs:
     steps:
       name: Run tests
       working-directory: ../../
-        run: |
-         python manage.py test
+        run: python manage.py test
 #source: https://docs.github.com/en/actions/quickstart
