@@ -4,12 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up
-      uses: actions/setup-python@v2
-      with:
-      python-version: 3.9
-    - name: Run tests
     - working-directory: ../../
-    - run: python manage.py test
+    - name: Set up
+      uses: actions/checkout@v2
+      uses: actions/setup-python@v2
+      python-version: 3.9
+      run: python manage.py test
+    
 #source: https://docs.github.com/en/actions/quickstart
