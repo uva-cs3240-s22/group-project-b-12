@@ -28,4 +28,4 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
-source: https://github.com/uva-cs3240-f21/Staff-Build-Example/blob/main/.github/workflows/django.yml
+source: https://github.com/uva-cs3240-f21/Staff-Build-Example/blob/main/.github/workflows/django.ym
