@@ -22,5 +22,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('profiles/', include('profiles.urls')),
     path('sessions/', views.sessions, name='sessions'),
-    #path('sessions/post/', views) )
+    #functional URL
+    path('sessions/post/', views.postSession, name='postSession'),
+    #Input URL
+    path('sessions/submit/', views.SessionPostView.as_view(), name='submitSession'),
 ]
