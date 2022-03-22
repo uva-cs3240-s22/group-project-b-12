@@ -1,8 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from studybud.models import Session
 from django.utils import timezone
 from django.views import generic
+from django.urls import reverse
 
 def sessions(request):
     return render(request, 'studybud/sessions.html', {})
@@ -11,12 +12,12 @@ def postSession(request):
     if request.method == "POST":
         session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'])
 
-        return HttpResponseRedirect(reverse('studybud:sessions'))
+        return HttpResponseRedirect(reverse('sessions'))
     else:
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
 
 class SessionPostView(generic.ListView):
-    template_name = 'studybud.sessionSubmit.html'
+    template_name = 'studybud/sessionSubmit.html'
     context_object_name = 'session_list'
 
     session_list = Session.objects.all()

@@ -5,7 +5,7 @@
 
 
 
-<form role="form" action="{% url 'polls:postSession' %}" method = "post">
+<form role="form" action="{% url 'postSession' %}" method = "post">
     {% csrf_token %}
     {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
 
