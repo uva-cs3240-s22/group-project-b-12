@@ -1,0 +1,27 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+<form role="form" action="{% url 'polls:postSession' %}" method = "post">
+    {% csrf_token %}
+    {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
+
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label for="Session">Submit a Study Session Here:<label><br>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" placeholder="Location"id="Location" name="location" required ><br>
+            <small id="maxcharacter" class="form-text">
+                Maximum of 250 characters.
+              </small>
+            <input type="text" class="form-control" placeholder="Details"id="Details" name="details" ><br>
+            <input type="text" class="form-control" placeholder="Course (in 'APMA 1000' format)"id="Course" name="course" required ><br>
+            {% buttons submit='Submit' %}{% endbuttons %} 
+        </div>
+    </div>
+    
+  </form>

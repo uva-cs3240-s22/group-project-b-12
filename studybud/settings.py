@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'studybud.apps.StudybudConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
