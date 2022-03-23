@@ -21,9 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('profiles/', include('profiles.urls')),
-    path('sessions/', views.sessions, name='sessions'),
+    path('sessions/', views.sessionListView.as_view(), name='sessions'),
     #functional URL
     path('sessions/post/', views.postSession, name='postSession'),
     #Input URL
     path('sessions/submit/', views.SessionPostView.as_view(), name='submitSession'),
+    #Clicking on the Session object takes you to it's specific detail view
+    path('sessions/<int:pk>/', views.SessionDetailView.as_view(), name='sessionDetail')
 ]

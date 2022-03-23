@@ -5,8 +5,14 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 
-def sessions(request):
-    return render(request, 'studybud/sessions.html', {})
+class sessionListView(generic.ListView):
+    template_name='studybud/sessions.html'
+    context_object_name = 'session_list'
+    #session_list = Session.objects.all()
+                                    #objects.filter(date__gte=timezone.now())
+
+    def get_queryset(self):
+        return Session.objects.all()
 
 def postSession(request):
     if request.method == "POST":
@@ -28,3 +34,11 @@ class SessionPostView(generic.ListView):
         published in the future).
         """
         return Session.objects.all()
+
+
+class SessionDetailView(generic.DetailView):
+    model = Session
+    template_name= 'studybud/sessionDetail.html'
+
+    def get_queryset(self):
+        return Session.objects.filter(date__gte=timezone.now())
