@@ -1,66 +1,33 @@
+{% extends 'profiles/base.html' %}
 <!DOCTYPE html>
 {% load socialaccount %}
 {% load static %}
-<html>
-    <head>
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'profiles/tester.css' %}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-              crossorigin="anonymous">
-        <title>Google Registration</title>
-    </head>
-    <body>
-        <div class="container">
-            <!-- <h1>Google Login Tester</h1> -->
-            {% if user.is_authenticated %}
-                <p>
-                    Welcome, {{ user.username }} !
-                </p>
-            {% else %}
-                <!-- <a href="{% provider_login_url 'google' %}">Login with Google</a> -->
-                <div id="main-wrapper" class=" d-flex justify-content-center">
-                    <div class="row row-1 ">
-                        <div class="col-xl-10">
-                            <div class="card border-0">
-                                <div class="card-body p-0">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-6">
-                                            <div class="p-5 text-center">
-                                                <div class="mb-5">
-                                                    <h3 class="h4 font-weight-bold text-theme text-center">Login</h3>
-                                                </div>
-                                                <h6 class="h5 mb-0">Welcome!</h6>
-                                                <p class="text-muted mt-2 mb-5">
-                                                    Please login with your Google account.
-                                                </p>
-                                                <a href="#" class="btn btn-primary">Login with Google</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 d-none d-lg-inline-block pad">
-                                            <div class="account-block rounded-right">
-                                                <div class="overlay rounded-right"></div>
-                                                <div class="account-testimonial">
-                                                    <h4 class="text-white mb-4">[Name of our site?]</h4>
-                                                    <p class="text-white">
-                                                        "[Something about the app]"
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end card-body -->
-                            </div>
-                            <!-- end card -->
-                            <!-- end row -->
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- Row -->
+
+{% block content %}
+<div class="container">
+    <!-- <h1>Google Login Tester</h1> -->
+    {% if user.is_authenticated %}
+        <p>
+            Welcome, {{ user.username }} !
+        </p>
+    {% else %}
+        <!-- <a href="{% provider_login_url 'google' %}">Login with Google</a> -->
+        <div id="main-wrapper" class=" d-flex justify-content-center">
+            <div class="row row-1 ">
+                <div class="mb-5 " style="margin-top: 150px">
+                    <h3 class="h4 font-weight-bold text-theme text-center">Login</h3>
                 </div>
-            {% endif %}
+                <h6 class="h5 mb-0 text-center">Welcome!</h6>
+                <p class="text-muted mt-2 mb-5 text-center">
+                    Please login with your Google account.
+                </p>
+                <div class="text-center">
+                    <a href="{% provider_login_url 'google' %}" class="btn btn-success" style="min-width: 200px; max-width: 200px;">Login with Google</a>
+                </div>
+            </div>
         </div>
-    </body>
-</html>
+    </div>
+    <!-- Row -->
+</div>
+{% endif %}
+{% endblock %}
