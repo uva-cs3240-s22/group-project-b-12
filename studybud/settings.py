@@ -146,7 +146,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-if 'HEROKU' in os.environ:
+if '/app' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
 
