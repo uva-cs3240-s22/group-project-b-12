@@ -10,7 +10,7 @@
 {% if session_list %}
     <ul class = "list-group">
     {% for session in session_list %}
-    <li class ="list-group-item bg-transparent list-group-item-success">{{ session.course }}  {{ session.date}}</a></li>
+    <li class ="list-group-item bg-transparent list-group-item-success"><a href="{% url 'sessionDetail' session.id %}">{{ session.course }}  {{ session.date}}</a></li>
     {% endfor %}
     </ul>
 {% else %}

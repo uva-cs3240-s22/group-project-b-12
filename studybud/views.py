@@ -41,10 +41,10 @@ class SessionDetailView(generic.DetailView):
     template_name= 'studybud/sessionDetail.html'
 
     def get_queryset(self):
-        return Session.objects.filter(date__gte=timezone.now())
+        return Session.objects.all()
 
-class indexView(generic.DetailView):
-    template_name = 'studybud/index.html'
+# class indexView(generic.DetailView):
+#     template_name = 'studybud/index.html'
 
 def index(request):
     return render(request, 'studybud/index.html')
