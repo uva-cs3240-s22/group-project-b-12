@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
    'b12-studdy-buddy.herokuapp.com',
    '*.herokuapp.com',
+   '*',
 ]
 
 
