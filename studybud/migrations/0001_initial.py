@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='Session',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('attendees', models.IntegerField(default=1)),
+               # ('attendees', models.IntegerField(default=1)),
                 ('date', models.DateTimeField(verbose_name='meeting date')),
                 ('location', models.CharField(max_length=250)),
                 ('course', models.CharField(max_length=9)),
