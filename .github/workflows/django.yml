@@ -16,6 +16,6 @@ jobs:
     - name: Run tests
       run: python manage.py test
     - name: Test Features
-      run: python tests.py test
+      run: python studybud/tests.py test
     
 #source: https://docs.github.com/en/actions/quickstart
