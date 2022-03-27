@@ -1,0 +1,20 @@
+{% extends 'studybud/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block content %}
+<li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}"> Post a study Session </a>
+
+<li class="list-group-item disabled">Posted Study Sessions:</li>
+{% if session_list %}
+    <ul class = "list-group">
+    {% for session in session_list %}
+    <li class ="list-group-item bg-transparent list-group-item-success"><a href="{% url 'sessionDetail' session.id %}">{{ session.course }}  {{ session.date}}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p class="list-group-item">There are currently no scheduled Study Sessions.</p>
+{% endif %}
+{% endblock %}
