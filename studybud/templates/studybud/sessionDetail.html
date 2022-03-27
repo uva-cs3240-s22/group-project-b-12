@@ -1,23 +1,16 @@
-<html>
-    <head>
-        <meta charset='utf-8'>
-        <title>This is the beginning of the sessions page.</title>
-    </head>
-    <body> 
-        <h1> This Study Session</h1>
-    </body>
-</html>
-
+{% extends 'studybud/base.html' %}
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-
-<li class="list-group-item disabled">This Study Session:</li>
-    <ul class = "list-group">
-        <li class ="list-group-item bg-transparent list-group-item-success">For: {{ session.course }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">On: {{ session.date }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">At: {{ session.location }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">Here are additional details the creator left: {{ session.details }}</a></li>
-    </ul>
+{% block content %}
+    <h1>This Study Session</h1>
+    <li class="list-group-item disabled">This Study Session:</li>
+        <ul class = "list-group">
+            <li class ="list-group-item bg-transparent list-group-item-success">For: {{ session.course }}</a></li>
+            <li class ="list-group-item bg-transparent list-group-item-success">On: {{ session.date }}</a></li>
+            <li class ="list-group-item bg-transparent list-group-item-success">At: {{ session.location }}</a></li>
+            <li class ="list-group-item bg-transparent list-group-item-success">Here are additional details the creator left: {{ session.details }}</a></li>
+        </ul>
+{% endblock %}

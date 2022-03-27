@@ -1,33 +1,34 @@
+{% extends 'studybud/base.html' %}
 {% load static %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
 
+{% block content %}
+    <form role="form" action="{% url 'postSession' %}" method = "post">
+        {% csrf_token %}
+        {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label for="Session">Submit a Study Session Here:<label><br>
+            </div>
+            <label for="date">Choose a time for your Study Session:</label>
 
-<form role="form" action="{% url 'postSession' %}" method = "post">
-    {% csrf_token %}
-    {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
-
-    <div class="form-row align-items-center">
-        <div class="col-auto">
-            <label for="Session">Submit a Study Session Here:<label><br>
+                <input type="datetime-local" id="Date"
+                        name="date" value="2022-03-12T19:30"
+                        min="2022-01-07T00:00" >
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Location"id="Location" name="location" required ><br>
+                <small id="maxcharacter" class="form-text">
+                    Maximum of 250 characters.
+                </small>
+                
+                <input type="text" class="form-control" placeholder="Details"id="Details" name="details" ><br>
+                <input type="text" class="form-control" placeholder="Course (in 'APMA 1000' format)"id="Course" name="course" required ><br>
+                {% buttons submit='Submit' %}{% endbuttons %} 
+            </div>
         </div>
-        <label for="date">Choose a time for your Study Session:</label>
-
-            <input type="datetime-local" id="Date"
-                    name="date" value="2022-03-12T19:30"
-                    min="2022-01-07T00:00" >
-        <div class="col-auto">
-            <input type="text" class="form-control" placeholder="Location"id="Location" name="location" required ><br>
-            <small id="maxcharacter" class="form-text">
-                Maximum of 250 characters.
-              </small>
-            
-            <input type="text" class="form-control" placeholder="Details"id="Details" name="details" ><br>
-            <input type="text" class="form-control" placeholder="Course (in 'APMA 1000' format)"id="Course" name="course" required ><br>
-            {% buttons submit='Submit' %}{% endbuttons %} 
-        </div>
-    </div>
-    
-  </form>
+        
+    </form>
+{% endblock %}
