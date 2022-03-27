@@ -146,14 +146,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-# if '/app' in os.environ['HOME']:
-#     import django_heroku
-#     django_heroku.settings(locals())
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profiles'
-
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True

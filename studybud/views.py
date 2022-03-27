@@ -4,8 +4,6 @@ from studybud.models import Session
 from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
 
 class sessionListView(generic.ListView):
     template_name='studybud/sessions.html'
