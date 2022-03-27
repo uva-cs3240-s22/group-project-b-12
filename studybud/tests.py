@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.db import models
 from .models import Session
 from django.utils import timezone
 from django.views import generic
