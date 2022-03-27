@@ -1,19 +1,33 @@
+{% extends 'profiles/base.html' %}
+<!DOCTYPE html>
 {% load socialaccount %}
-<html>
+{% load static %}
 
-<head>
-    <title>Google Registration</title>
-</head>
-
-<body>
-    <h1>Google Login Tester</h1>
+{% block content %}
+<div class="container">
+    <!-- <h1>Google Login Tester</h1> -->
     {% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }} !</p>
-
+        <p>
+            Welcome, {{ user.username }} !
+        </p>
     {% else %}
-    <a href="{% provider_login_url 'google' %}">Login with Google</a>
-    {% endif %}
-
-</body>
-
-</html>
+        <!-- <a href="{% provider_login_url 'google' %}">Login with Google</a> -->
+        <div id="main-wrapper" class=" d-flex justify-content-center">
+            <div class="row row-1 ">
+                <div class="mb-5 " style="margin-top: 150px">
+                    <h3 class="h4 font-weight-bold text-theme text-center">Login</h3>
+                </div>
+                <h6 class="h5 mb-0 text-center">Welcome!</h6>
+                <p class="text-muted mt-2 mb-5 text-center">
+                    Please login with your Google account.
+                </p>
+                <div class="text-center">
+                    <a href="{% provider_login_url 'google' %}" class="btn btn-success" style="min-width: 200px; max-width: 200px;">Login with Google</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+</div>
+{% endif %}
+{% endblock %}
