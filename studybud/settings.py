@@ -27,12 +27,18 @@ SECRET_KEY = 'django-insecure-3ih$^t)ug$$x46cm5@1-ytuyvd1xkw=l_1dw7c!_1h-h)p-yh5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+   'b12-studdy-buddy.herokuapp.com',
+   '*.herokuapp.com',
+   '*',
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap5',
+    'studybud.apps.StudybudConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,7 +146,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-if 'HEROKU' in os.environ:
+if '/app' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
 
