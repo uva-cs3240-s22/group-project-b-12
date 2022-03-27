@@ -1,0 +1,10 @@
+client id:
+845819893780-iibpdr9gq8rgheh76d2407h1blcqavs5.apps.googleusercontent.com
+client secret:
+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
+
+
+client id:
+893857578765-v51ojliqsdee9j3oehmanetcln0rg79h.apps.googleusercontent.com
+client secret:
+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
