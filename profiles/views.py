@@ -3,6 +3,6 @@ from django.shortcuts import redirect
 
 # Create your views here.
 def loginView(request):
-    # if request.user.is_authenticated:
-    #     return redirect("/sessions")
+    if request.user.is_authenticated:
+        return redirect("/sessions")
     return render(request, 'profiles/login.html', {})
