@@ -15,6 +15,6 @@ class SessionTestCase(TestCase):
     def test_fields(self):
         session = Session.objects.create(date='2022-03-12 07:30', location='Alderman', course='CS 3240', details = 'testing')
         #test1 = Session.objects.get(course='CS 3240')
+        #return self.assertEqual(Session.__str__(session),"Study session at Alderman on 2022-03-12 07:30 for CS 3240. Here are any additional details: testing.")
+        self.assertContains(session, 'Alderman')
         return self.assertEqual(Session.__str__(session),"Study session at Alderman on 2022-03-12 07:30 for CS 3240. Here are any additional details: testing.")
-    
-    
