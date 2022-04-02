@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <title>This is my Profile Page.</title>
+    </head>
+    <body> 
+        <h1> My profile page</h1>
+    </body>
+</html>
+
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+<li class="list-group-item disabled">My Profile Page:</li>
+    <ul class = "list-group">
+        <li class ="list-group-item bg-transparent list-group-item-success">Username: {{ Profile.user }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Bio: {{ Profile.about }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Year: {{ Profile.year }}</a></li>
+    </ul>
