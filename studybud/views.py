@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from studybud.models import Session
 from django.utils import timezone
 from django.views import generic
@@ -45,6 +45,10 @@ class SessionDetailView(generic.DetailView):
 
 # class indexView(generic.DetailView):
 #     template_name = 'studybud/index.html'
+
+
+def redirect_view(request):
+    return redirect('/profiles/profilepage')
 
 def index(request):
     return render(request, 'studybud/index.html')
