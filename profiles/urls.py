@@ -4,4 +4,5 @@ from . import views
 #3/20 ONLY one goes to loginView
 urlpatterns = [
     path('', views.loginView, name="loginView"),
+    path('profilepage', views.profileView, name="profileView")
 ]
