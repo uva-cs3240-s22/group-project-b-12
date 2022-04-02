@@ -13,10 +13,16 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-
+{% if profile_list %}
 <li class="list-group-item disabled">My Profile Page:</li>
     <ul class = "list-group">
-        <li class ="list-group-item bg-transparent list-group-item-success">Username: {{ Profile.user }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">Bio: {{ Profile.about }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">Year: {{ Profile.year }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Username: {{ profile_list.username }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Bio: {{ profile_list.about }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Year: {{ profile_list.year }}</a></li>
     </ul>
+
+{% else %}
+    <p class="list-group-item">Please create your profile by clicking the link below.</p>
+{% endif %}
+
+<li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'viewUpdate' %}"> Edit My Profile </a>
