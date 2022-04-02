@@ -1,0 +1,25 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+<form role="form" action="{% url 'update' %}" method = "post">
+    {% csrf_token %}
+    {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
+
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label for="Profile">Update Your Profile Here:<label><br>
+        </div>
+        <div class="col-auto">
+	    <input type="text" class="form-control" placeholder="Username" id="Username" name="Username" ><br>
+            <input type="text" class="form-control" placeholder="Bio" id="Bio" name="Bio" ><br>
+            
+            <input type="text" class="form-control" placeholder="Year" id="Year" name="Year" required ><br>
+            {% buttons submit='Submit' %}{% endbuttons %} 
+        </div>
+    </div>
+    
+  </form>
