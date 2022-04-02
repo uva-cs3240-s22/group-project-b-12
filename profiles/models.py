@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Profile(models.Model):
-
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    #user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.TextField(max_length = 250, default = "")
     #Creates username for user
     #username = models.CharField(max_length = 100)
 
@@ -16,4 +16,4 @@ class Profile(models.Model):
     year = models.IntegerField(default = 1)
 
     def __str__(self):
-        return "My name is " + str(self.user) +" and I am a " + str(self.year)+" year. Here are a few details about me: "+ self.about +"."
+        return self.userame
