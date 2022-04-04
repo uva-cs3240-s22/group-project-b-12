@@ -1,7 +1,5 @@
-{% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+{% extends 'studybud/base.html'%}
+{% block content %}
 
 
 <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}"> Post a study Session </a>
@@ -17,3 +15,4 @@
     <p class="list-group-item">There are currently no scheduled Study Sessions.</p>
 {% endif %}
 
+{% endblock %}

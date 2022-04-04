@@ -1,9 +1,5 @@
-{% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-
+{% extends 'studybud/base.html'%}
+{% block content %}
 
 <form role="form" action="{% url 'postSession' %}" method = "post">
     {% csrf_token %}
@@ -31,3 +27,5 @@
     </div>
     
   </form>
+
+  {% endblock %}
