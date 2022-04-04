@@ -4,13 +4,17 @@ from studybud.models import Session
 from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class sessionListView(generic.ListView):
+
+
+class sessionListView(LoginRequiredMixin,generic.ListView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
     template_name='studybud/sessions.html'
     context_object_name = 'session_list'
     #session_list = Session.objects.all()
                                     #objects.filter(date__gte=timezone.now())
-
     def get_queryset(self):
         return Session.objects.all()
 
@@ -23,6 +27,8 @@ def postSession(request):
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
 
 class SessionPostView(generic.ListView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
     template_name = 'studybud/sessionSubmit.html'
     context_object_name = 'session_list'
 
@@ -37,6 +43,8 @@ class SessionPostView(generic.ListView):
 
 
 class SessionDetailView(generic.DetailView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
     model = Session
     template_name= 'studybud/sessionDetail.html'
 
