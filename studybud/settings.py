@@ -153,6 +153,7 @@ if '/app' in os.environ['HOME']:
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profiles'
+LOGOUT_REDIRECT_URL = '/profiles'
 
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET= True
