@@ -16,4 +16,4 @@ class Profile(models.Model):
     year = models.IntegerField(default = 1)
 
     def __str__(self):
-        return self.userame
+        return self.username
