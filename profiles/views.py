@@ -16,8 +16,8 @@ def logoutView(request):
     logout(request)
     return redirect("/")
 @login_required
-def profile(request):
-    return render(request, 'profiles/profile.html')
+#def profile(request):
+#    return render(request, 'profiles/profile.html')
 class RegisterView(View):
     form_class = RegisterForm
     initial = {'key': 'value'}
