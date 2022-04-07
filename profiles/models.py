@@ -9,10 +9,10 @@ class Profile(models.Model):
     #username = models.CharField(max_length = 100)
 
     #User can input some information about themselves
-##    about = models.TextField(max_length = 250)
+    about = models.TextField(max_length = 250)
 
     #User can indicate what year they are in
-##    year = models.IntegerField(default = 1)
+    year = models.IntegerField(default = 1)
 
     def __str__(self):
         return self.user
