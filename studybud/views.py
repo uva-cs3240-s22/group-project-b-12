@@ -2,9 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from studybud.models import Session
 from django.utils import timezone
+from datetime import datetime
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
@@ -13,10 +15,9 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
     redirect_field_name = 'redirect_to'
     template_name='studybud/sessions.html'
     context_object_name = 'session_list'
-    #session_list = Session.objects.all()
-                                    #objects.filter(date__gte=timezone.now())
+
     def get_queryset(self):
-        return Session.objects.all()
+        return Session.objects.filter(date__gte=datetime.today())
 
 def postSession(request):
     if request.method == "POST":
