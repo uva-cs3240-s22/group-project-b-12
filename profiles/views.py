@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
-from .forms import RegisterForm, UpdateProfileForm
+from .forms import RegisterForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def loginView(request):
