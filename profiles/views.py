@@ -17,7 +17,7 @@ def logoutView(request):
     return redirect("/")
 
 
-@login_required
+#@login_required
 #def profile(request):
  #   return render(request, 'profiles/profile.html') 
     
