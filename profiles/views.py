@@ -6,6 +6,9 @@ from django.urls import reverse
 from django.views import View
 from .forms import RegisterForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
+
 # Create your views here.
 def loginView(request):
     if request.user.is_authenticated:
