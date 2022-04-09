@@ -7,7 +7,7 @@
     {% if user_form.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
             <div id="form_errors">
-                {% for key, value in user_form.errors.items %}
+                {% for key, value in user.errors.items %}
                     <strong>{{ value }}</strong>
                 {% endfor %}
             </div>
