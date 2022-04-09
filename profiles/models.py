@@ -15,9 +15,9 @@ class Profile(models.Model):
     #year = models.IntegerField(default = 1)
 
 # Extending User Model Using a One-To-One Link
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE)
 
     bio = models.TextField()
 
     def __str__(self):
-        return self.user.username
+        return self.user_id.username
