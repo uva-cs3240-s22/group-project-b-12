@@ -12,3 +12,8 @@
    display: block;
    cursor: pointer;
 }
+
+body{
+    padding-bottom:200px;
+}
+/* TODO: Make space at bottom of page for footer */
