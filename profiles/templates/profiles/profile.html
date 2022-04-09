@@ -4,10 +4,10 @@
     <div class="row my-3 p-3">
         <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
     </div>
-    {% if user.errors %}
+    {% if user_id.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
             <div id="form_errors">
-                {% for key, value in user.errors.items %}
+                {% for key, value in user_id.errors.items %}
                     <strong>{{ value }}</strong>
                 {% endfor %}
             </div>
@@ -23,7 +23,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label class="small mb-1">Username:</label>
-                            {{ user.username }}
+                            {{ user_id.username }}
                     </div>
                     <label class="small mb-1">Bio:</label> {{ profile_form.bio }}
                 </div>
