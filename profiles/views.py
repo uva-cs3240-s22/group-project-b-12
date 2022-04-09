@@ -33,7 +33,7 @@ def profile(request):
             return redirect(to='users-profile')
     else:
         #user_form = UpdateUserForm(instance=request.user)
-        profile_form = UpdateProfileForm(instance=request.user.profile)
+        profile_form = UpdateProfileForm(instance=request.user_id.profile)
 
     return render(request, 'profiles/profile.html', {'profile_form': profile_form}) 
     
