@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.views import View
-from .forms import RegisterForm
+from .forms import RegisterForm, UpdateProfileForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def loginView(request):
@@ -15,6 +15,8 @@ def loginView(request):
 def logoutView(request):
     logout(request)
     return redirect("/")
+
+
 @login_required
 def profile(request):
     return render(request, 'profiles/profile.html')
