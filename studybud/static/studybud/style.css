@@ -1,0 +1,14 @@
+.session {
+    background-color: white;
+    border-radius   : 7px;
+    box-shadow      : 0px 3px 6px rgba(189, 187, 187, 0.533);
+    margin-bottom   : 8px;
+    padding         : 8px 0 8px;
+    border: 1px solid #e5ebf0;
+    transition: border 0.2s;
+}
+.session:hover {
+    border: 1px solid darkgray;
+   display: block;
+   cursor: pointer;
+}

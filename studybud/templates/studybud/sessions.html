@@ -1,18 +1,37 @@
-{% extends 'studybud/base.html'%}
+{% extends 'studybud/base.html' %}
 {% block content %}
-
-
-<li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}"> Post a study Session </a>
-
-<li class="list-group-item disabled">Posted Study Sessions:</li>
-{% if session_list %}
-    <ul class = "list-group">
-    {% for session in session_list %}
-    <li class ="list-group-item bg-transparent list-group-item-success"><a href="{% url 'sessionDetail' session.id %}">{{ session.course }}  {{ session.date}}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p class="list-group-item">There are currently no scheduled Study Sessions.</p>
-{% endif %}
-
+    {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
+    <div class="d-grid gap-2 d-md-block text-center">
+        <h1 class="text-center" style="margin-bottom: 35px;">Home</h1>
+        <a class="btn btn-primary " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">+ New Session</a>
+    </div>
+    {% if session_list %}
+        <div class="row justify-content-center">
+            <div class="col-5">
+                
+                {% for session in session_list %}
+                    <div class="row session"
+                         onclick="location.href='{% url 'sessionDetail' session.id %}'">
+                        <div class="row">
+                            <div class="col">
+                                <h4>{{ session.course }}</h4>
+                            </div>
+                            <div class="col-7">
+                                <p class="text-center">
+                                    {{ session.date }} at {{ session.location }}
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="list-group-item">
+                There are currently no scheduled Study Sessions.
+            </p>
+        {% endif %}
+    </div>
 {% endblock %}
