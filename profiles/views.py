@@ -7,6 +7,7 @@ from django.views import View
 from .forms import RegisterForm, UpdateProfileForm, UpdateUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Profile
 
 
 # Create your views here.
