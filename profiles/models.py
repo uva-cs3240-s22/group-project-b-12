@@ -5,9 +5,12 @@ from django.contrib.auth.models import User
 
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.TextField()
 
     def __str__(self):
         return self.user.username
+
+class Test(models.Model):
+    test = models.TextField()
 # Create your models here.

@@ -24,6 +24,7 @@ def logoutView(request):
 @login_required
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
+    messages.success(request, request.user)
     if request.method == 'POST':
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
         if profile_form.is_valid():
