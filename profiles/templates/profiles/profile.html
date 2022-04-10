@@ -33,7 +33,31 @@
                                 
                             </div>
                   </div>  
-
+ <!--ADD CLASS DISPLAY-->
+            </div> 
+            <br><br>
+            <div class="row">
+              {% for course in all_classes %}
+                <div class="col-md-4 col-sm-6 col-lg-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p class="card-title">{{ course.class_title }}</p>
+                      <hr>
+                      <p class="card-text">{{ course.instructor }}</p>
+                      <a href="/meals/{{meal.id}}"
+                      ><input
+                        type="submit"
+                        value="Learn More"
+                        class="btn btn-danger btn-sm"
+                        type="button"
+                    /></a>
+                    </div>
+                  </div>
+                  <br><br><br>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
             </form>
         </div>
     </div>
