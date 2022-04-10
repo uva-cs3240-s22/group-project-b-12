@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateUserForm, UpdateProfileForm
+from .forms import UpdateProfileForm
 from django.contrib import messages
 from .models import Profile
 
@@ -22,18 +22,15 @@ def logoutView(request):
 
 @login_required
 def profile(request):
-    player, created = Profile.objects.get_or_create(user=request.user)
+    prof, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        user_form = UpdateUserForm(request.POST, instance=request.user)
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
+        if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
             return redirect(to='users-profile')
+
     else:
-        user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'profiles/profile.html', {'user_form': user_form, 'profile_form': profile_form}) 
+    return render(request, 'profiles/profile.html', {'profile_form': profile_form}) 
