@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,4 +31,4 @@ urlpatterns = [
     #Clicking on the Session object takes you to it's specific detail view
     path('sessions/<int:pk>/', views.SessionDetailView.as_view(), name='sessionDetail'),
     
-]
+] 
