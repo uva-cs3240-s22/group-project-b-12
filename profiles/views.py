@@ -10,6 +10,7 @@ from .forms import UpdateProfileForm
 from django.contrib import messages
 from .models import Profile
 
+
 # Create your views here.
 def loginView(request):
     if request.user.is_authenticated:
