@@ -1,5 +1,6 @@
 
 {% extends "profiles/base.html" %}
+{% load static %}
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
 
@@ -19,6 +20,44 @@
                 <br><br>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <button type="reset" class="btn btn-primary">Reset</button>
+                <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="small mb-1">Add your classes</label>
+                                <br>
+                                 <form method="GET">
+                                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
+                                      <button type = "submit" class = "btn-light btn-sm">Add Class</button>
+                                 </form>  
+                                </div>
+                                
+                            </div>
+                  </div>  
+
+                <!--ADD CLASS DISPLAY-->
+            </div> 
+            <br><br>
+            <div class="row">
+              {% for course in all_classes %}
+                <div class="col-md-4 col-sm-6 col-lg-3">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p class="card-title">{{ course.class_title }}</p>
+                      ><input
+                        type="submit"
+                        value="Learn More"
+                        class="btn btn-danger btn-sm"
+                        type="button"
+                    /></a>
+                    </div>
+                  </div>
+                  <br><br><br>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+                  
             </form>
         </div>
     </div>
