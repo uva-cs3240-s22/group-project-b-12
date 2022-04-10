@@ -41,6 +41,7 @@ def get_classes(request):
         name = request.GET['name']
         url =  'https://www.themealdb.com/api/json/v1/1/search.php?subject=%s' % name
         all_classes = {}
+        context_object_name = 'all_classes'
         response = requests.get(url)
         data = response.json()
         courses = data['records']
