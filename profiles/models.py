@@ -8,8 +8,8 @@ from django.contrib.postgres.fields import ArrayField
 
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
-    id = models.BigIntegerField(primary_key = False, default=1)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    id = models.BigIntegerField(primary_key = True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField()
     #classes = models.ForeignKey(User, on_delete = models.CASCADE, related_name='user')
 
