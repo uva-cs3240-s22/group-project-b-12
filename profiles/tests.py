@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.test import Client
 from django.contrib import auth
-
+from .models import Profile
 # Create your tests here.
 class accountTest(TestCase):
     # To check if the login page redirects users to the home page if they're not logged in
@@ -29,9 +29,47 @@ class accountTest(TestCase):
         # user.save()
         # self.client.login(username='alen', password='test')
 
-        
-        
+class ProfileTest(TestCase):
+
+    # To check that the model fields are only user and bio
+    # Expected result: The model returns user and bio as it's fields
+    def test_profile_fields(self):
+       self.assertEqual([f.name for f in Profile._meta.get_fields()], ['user','bio'])
+
+    # To check that the profile model doesn't accept invalid values as users
+    # Expected result: It raises a value error when you try to put a string instead of a user
+    def test_invalid_profile_user(self):
+        with self.assertRaises(ValueError):
+            k = Profile('test','test')
+            k.save()
     
+    # To check that profiles with no bios are created (null is accepted)
+    # Expected result: Profile k is successfully created with no bio
+    def test_no_profile_bio(self):
+        user = User.objects.create_user(username='testuser', password='12345')
+        k = Profile(user.id)
+        k.save()
+
+    # To check that profiles with no user don't get created
+    # Expected result: Profile k raises a value error because it has no user argument
+    def test_no_profile_user(self):
+        with self.assertRaises(ValueError):
+            k = Profile('bio')
+            k.save()
+
+    # To check that the profile model accepts valid values
+    # Expected result: The k profile is successfully created
+    def test_valid_profile_creation(self):
+        user = User.objects.create_user(username='testuser', password='12345')
+        k = Profile(user.id, 'test')
+    
+    # To check that the database saves profile models with correct values
+    # Expected result: The k profile is successfully saved into the database
+    def test_valid_profile_save(self):
+        user = User.objects.create_user(username='testuser', password='12345')
+        k = Profile(user.id, 'test')
+        k.save()
+
     # def login(self):
     #     self.client.login(username='alen', password='test')
     
