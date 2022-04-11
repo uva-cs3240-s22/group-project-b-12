@@ -146,9 +146,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-# if '/app' in os.environ['HOME']:
-#     import django_heroku
-#     django_heroku.settings(locals())
+#UNCOMMENT THIS when deploying to heroku
+#TODO: Ask TA how to not have to do this everytime we deploy
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
