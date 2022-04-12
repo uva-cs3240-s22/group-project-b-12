@@ -21,12 +21,11 @@
                                     {{ session.date }} @ {{ session.location }}
                                 </p>
                             </div>
-                            <div class="col-2">
-                                onclick="location.href='{% url 'profilepage' %}'"
-                                <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a>
-                            </div>
                         </div>
                     </div>
+               <div class="col-2">
+                     <a class="btn btn-primary float-end" href="#" role="button" onclick="location.href='{% url 'profilepage' %}'">Sign Up</a>
+               </div>
                 {% endfor %}
             </div>
         {% else %}
