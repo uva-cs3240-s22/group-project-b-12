@@ -15,15 +15,15 @@
                             <div class="col">
                                 <h4>{{ session.course }}</h4>
                             </div>
-                            <div class="col-7">
+                            <div class="col-5">
                                 <p class="text-center">
                                     {{ session.date }} @ {{ session.location }}
                                 </p>
-                                <div class="col-9">
+                                <div class="col-7">
                                 <a class="btn btn-primary float-end" href="#" role="button" onclick="location.href='{% url 'sessionDetail' session.id %}'">>More Details</a>
                                 </div>                                
       
-                                <div class="col-11">
+                                <div class="col-9">
                                 <a class="btn btn-primary float-end" href="#" role="button" onclick="location.href='{% url 'profilepage' %}'">Sign Up</a>
                                 </div>
                             </div>
