@@ -54,5 +54,8 @@ class SessionDetailView(generic.DetailView):
 # class indexView(generic.DetailView):
 #     template_name = 'studybud/index.html'
 
+def redirect_view(request):
+    return redirect('/profiles/profile')
+
 def index(request):
     return render(request, 'studybud/index.html')
