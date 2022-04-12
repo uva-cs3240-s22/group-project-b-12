@@ -21,6 +21,7 @@ def logoutView(request):
     logout(request)
     return redirect("/")
 
+# Source: https://dev.to/earthcomfy/django-user-profile-3hik
 @login_required
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
