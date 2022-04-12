@@ -56,3 +56,6 @@ class SessionDetailView(generic.DetailView):
 
 def index(request):
     return render(request, 'studybud/index.html')
+
+def redirect_view(request):
+    return redirect('/profiles/profile')
