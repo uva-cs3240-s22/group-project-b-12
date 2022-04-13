@@ -10,4 +10,4 @@ class UpdateProfileForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['user', 'bio']
+        fields = ['user', 'bio', 'sessions']

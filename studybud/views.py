@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from profiles.models import Profile
 
 
 
@@ -56,3 +57,16 @@ class SessionDetailView(generic.DetailView):
 
 def index(request):
     return render(request, 'studybud/index.html')
+
+def redirect_view(request):
+    return redirect('/profiles/profile')
+
+def sessions(request):
+    if request.method == "POST":
+        session_id = request.POST.get("session_pk")
+        session = Product.objects.get(id = session_id)
+        request.user.profile.products.add(session)
+        #messages.success(request,(f'{session} added to sessions.'))
+        return redirect('/profiles/profile')
+    #sessions = Session.objects.all()
+    return render(request, template_name="studybud/sessions.html")

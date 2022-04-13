@@ -148,9 +148,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #UNCOMMENT THIS when deploying to heroku
 #TODO: Ask TA how to not have to do this everytime we deploy
-if '/app' in os.environ['HOME']:
+#if '/app' in os.environ['HOME']:
+#    import django_heroku
+#   django_heroku.settings(locals())
+
+# BELOW IS WHAT THE TA SUGGESTED TO USE
+# Activate Django-Heroku.
+try:
+    # Configure Django App for Heroku.
     import django_heroku
-    django_heroku.settings(locals())
+
+    # test_runner=False disables heroku deps while testing in travis
+    django_heroku.settings(locals(), test_runner=False)
+except ImportError:
+    pass
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
