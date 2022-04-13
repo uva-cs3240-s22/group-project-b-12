@@ -65,7 +65,7 @@ def sessions(request):
     if request.method == "POST":
         session_id = request.POST.get("session_pk")
         session = Product.objects.get(id = session_id)
-        request.user.profile.products.add(session)
+        request.user.profile.sessions.add(session)
         #messages.success(request,(f'{session} added to sessions.'))
         return redirect('/profiles/profile')
     #sessions = Session.objects.all()
