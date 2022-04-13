@@ -63,10 +63,21 @@ def redirect_view(request):
 
 def sessions(request):
     if request.method == "POST":
+        profile_form = UpdateProfileForm(request.POST, instance=request.user.profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, ('Your sessions were successfully updated!'))
+        else:
+            messages.error(request, ('Unable to complete request'))
+        return redirect("main:userpage")
+        profile_form = UpdateProfileForm(instance=request.user.profile)
         session_id = request.POST.get("session_pk")
         session = Product.objects.get(id = session_id)
         request.user.profile.sessions.add(session)
-        #messages.success(request,(f'{session} added to sessions.'))
         return redirect('/profiles/profile')
-    #sessions = Session.objects.all()
     return render(request, template_name="studybud/sessions.html")
+
+
+
+	#return render(request = request, template_name ="main/user.html", context = {"user":request.user,
+		"user_form": user_form, "profile_form": profile_form })
