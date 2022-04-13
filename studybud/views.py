@@ -80,4 +80,4 @@ def sessions(request):
 
 
 	#return render(request = request, template_name ="main/user.html", context = {"user":request.user,
-		"user_form": user_form, "profile_form": profile_form })
+	#	"user_form": user_form, "profile_form": profile_form })
