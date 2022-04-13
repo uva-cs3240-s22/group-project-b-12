@@ -76,8 +76,3 @@ def sessions(request):
         request.user.profile.sessions.add(session)
         return redirect('/profiles/profile')
     return render(request, template_name="studybud/sessions.html")
-
-
-
-	#return render(request = request, template_name ="main/user.html", context = {"user":request.user,
-	#	"user_form": user_form, "profile_form": profile_form })
