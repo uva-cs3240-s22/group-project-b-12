@@ -7,11 +7,14 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.TextField()
-    sessions = models.ManyToManyField(Session)
+    
 
     def __str__(self):
         return self.user.username
 
+class ListedSessions(models.Model):
+    sessions = models.ManyToManyField(Session)
+    
 class Test(models.Model):
     test = models.TextField()
 # Create your models here.
