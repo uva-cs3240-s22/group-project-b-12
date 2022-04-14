@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from profiles.models import ListedSession
+from profiles.models import ListedSessions
 
 
 
