@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from profiles.models import ListedSession
 
 
 
@@ -61,7 +62,7 @@ def sessions(request):
 	if request.method == "POST":
 		session_id = request.POST.get("session_id")
 		session = Session.objects.get(id = session_id)
-		request.user.profile.sessions.add(session)
+		request.user.ListedSessions.sessions.add(session)
 		#messages.success(request,(f'{product} added to wishlist.'))
 		return redirect ('sessions')
 	return render(request, 'sessions.html', {'error': 'method is not post'} )
