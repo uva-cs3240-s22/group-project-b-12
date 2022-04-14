@@ -32,24 +32,20 @@ def profile(request):
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
             return redirect(to='users-profile')
-
     else:
         profile_form = UpdateProfileForm(instance=request.user.profile)
-
-    return render(request, 'profiles/profile.html', {'profile_form': profile_form}) 
-def get_classes(request):
-    if 'name' in request.GET:
-        name = request.GET['name']
-        url =  'https://api.devhub.virginia.edu/v1/courses/search.php?subject=%s' % name
-        all_classes = {}
-        context_object_name = 'all_classes'
+        #put code here
+        url =  'https://api.devhub.virginia.edu/v1/courses/'
         response = requests.get(url)
+        print(response)
         data = response.json()
-        courses = data['records']
-        for i in courses:
-            courses_data = Courses( 
+       # print(data['class_schedules']['records'])
+
+        courses = data['class_schedules']['records']
+        for i in courses: 
+            courses_data = Courses(
                  subject= i[0],
-                 catelog_number = i[1],
+                 catalog_number = i[1],
                  class_section = i[2],
                  class_number = i[3],
                  class_title = i[4],
@@ -60,8 +56,16 @@ def get_classes(request):
                  meeting_time_start = i[9],
                  meeting_time_end =i[10],
                  term = i[11],
-                 term_desc = i[12]
+                 term_desc = i[12]  
             )
             courses_data.save()
-            all_classes = Courses.objects.all().order_by('-id')
-    return render(request, 'profiles/profile.html', {"all_classes" : all_classes})
+        all_classes = Courses.objects.filter().order_by('-id')
+    return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes}) 
+
+
+#move entire thign into the profile view 
+
+         #   courses_data = Courses( #make this singular 
+      
+         #   all_classes = Courses.objects.all().order_by('-id') #change to filter by move to outside the for loop 
+
