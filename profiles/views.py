@@ -10,6 +10,8 @@ from .forms import UpdateProfileForm
 from django.contrib import messages
 from .models import Profile
 from studybud.views import sessions
+from studybud.models import Session
+
 
 # Create your views here.
 def loginView(request):
