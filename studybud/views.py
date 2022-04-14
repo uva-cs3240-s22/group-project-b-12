@@ -64,7 +64,7 @@ def sessions(request):
 		request.user.profile.sessions.add(session)
 		#messages.success(request,(f'{product} added to wishlist.'))
 		return redirect ('sessions')
-	return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
+	return render(request, 'sessions.html', {'error': 'method is not post'} )
 
 
 
