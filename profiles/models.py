@@ -1,5 +1,5 @@
 from django.db import models
-
+from studybud.models import Session
 from django.contrib.auth.models import User
 
 # Source: https://dev.to/earthcomfy/django-user-profile-3hik
@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.TextField()
+    sessions = models.ManyToManyField(Session)
 
     def __str__(self):
         return self.user.username
