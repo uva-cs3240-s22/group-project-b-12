@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.models import User
 
 
 class sessionListView(LoginRequiredMixin,generic.ListView):
@@ -20,7 +20,7 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
 
 def postSession(request):
     if request.method == "POST":
-        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'], host = request.POST['Host'])
+        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'], host = User.objects.get(email=request.POST['Host']))
 
         return HttpResponseRedirect(reverse('sessions'))
     else:

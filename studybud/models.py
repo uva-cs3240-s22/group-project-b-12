@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from django.contrib.auth.models import User
 
 class Session(models.Model):
     attendees = models.IntegerField(default = 1)
@@ -11,7 +12,7 @@ class Session(models.Model):
     course = models.CharField(max_length = 9)
     #Description of the purpose of the session
     details = models.TextField(max_length = 250)
-    host = models.TextField(max_length = 30)
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
     #Want to use this function in ListView somehow.
     #   No need to see past studySessions (also no need to see filled sessions)
     #   Another alternative to this is using .filter in View return statement:
