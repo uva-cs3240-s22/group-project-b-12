@@ -57,5 +57,16 @@ class SessionDetailView(generic.DetailView):
 def redirect_view(request):
     return redirect('/profiles/profile')
 
+def sessions(request):
+	if request.method == "POST":
+		session_id = request.POST.get("session_id")
+		session = Session.objects.get(id = session_id)
+		request.user.profile.sessions.add(product)
+		#messages.success(request,(f'{product} added to wishlist.'))
+		return redirect ('sessions')
+	return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
+
+
+
 def index(request):
     return render(request, 'studybud/index.html')
