@@ -11,7 +11,7 @@ class Session(models.Model):
     course = models.CharField(max_length = 9)
     #Description of the purpose of the session
     details = models.TextField(max_length = 250)
-
+    host = models.TextField(max_length = 30)
     #Want to use this function in ListView somehow.
     #   No need to see past studySessions (also no need to see filled sessions)
     #   Another alternative to this is using .filter in View return statement:
@@ -22,4 +22,4 @@ class Session(models.Model):
         return now<=self.date
 
     def __str__(self):
-        return "Study session with "+str(self.attendees)+"attendees at "+ self.location+ " on "+str(self.date)+" for "+self.course+". Here are any additional details: " +self.details+ "."
+        return "Study session with "+str(self.attendees)+" attendees at "+ self.location+ " on "+str(self.date)+" for "+self.course+ ". Hosted by " + self.host + ". Here are any additional details: " +self.details+ "."

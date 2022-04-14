@@ -20,7 +20,7 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
 
 def postSession(request):
     if request.method == "POST":
-        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'])
+        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'], host = request.POST['Host'])
 
         return HttpResponseRedirect(reverse('sessions'))
     else:
