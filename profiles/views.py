@@ -8,7 +8,8 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateProfileForm
 from django.contrib import messages
-from .models import Profile
+from .models import Profile, Courses
+import requests
 
 
 # Create your views here.
@@ -39,7 +40,7 @@ def profile(request):
 def get_classes(request):
     if 'name' in request.GET:
         name = request.GET['name']
-        url =  'https://www.themealdb.com/api/json/v1/1/search.php?subject=%s' % name
+        url =  'https://api.devhub.virginia.edu/v1/courses/search.php?subject=%s' % name
         all_classes = {}
         context_object_name = 'all_classes'
         response = requests.get(url)

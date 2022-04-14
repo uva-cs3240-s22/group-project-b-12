@@ -1,5 +1,6 @@
 
 {% extends "profiles/base.html" %}
+{% load static %}
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
 
@@ -33,7 +34,8 @@
                                 
                             </div>
                   </div>  
- <!--ADD CLASS DISPLAY-->
+
+                <!--ADD CLASS DISPLAY-->
             </div> 
             <br><br>
             <div class="row">
@@ -44,7 +46,7 @@
                       <p class="card-title">{{ course.class_title }}</p>
                       <hr>
                       <p class="card-text">{{ course.instructor }}</p>
-                      <a href="/meals/{{meal.id}}"
+                      <a href="/profiles/{{courses.id}}"
                       ><input
                         type="submit"
                         value="Learn More"
