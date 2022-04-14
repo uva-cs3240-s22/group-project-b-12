@@ -22,6 +22,27 @@
             </form>
             <div>
                 <label> Sessions I'm Signed Up For</label>
+                
+                <div class="row">
+			      	{% for session in user.profile.sessions.all %}
+				    	<div class="col-sm-12 col-md-6 col-lg-4 pb-4">
+			                <div class="h-100">
+            			    <div class="col">
+                                <h4>{{ session.course }}</h4>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-center">
+                                    {{ session.date }} @ {{ session.location }}
+                                </p>
+                                </div>
+			                	</div>
+			              	</div>
+			            </div>
+			    	{% endfor %}
+		        </div>
+                
+                
+                
             </div>
         </div>
     </div>
