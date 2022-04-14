@@ -57,12 +57,13 @@ class SessionDetailView(generic.DetailView):
 def index(request):
     return render(request, 'studybud/index.html')
 
-# def SessionSignUp(request):
-#     if request.method == "POST":
-#         session = request.POST['signUp']
-#         session.attendees.add(request.user)
-#     # session = request.POST['signUp']
-#     if request.method != "POST":
-#         print("hello")
-#     #print(session.id)
-#     return HttpResponse(status=204)
+def SessionSignUp(request):
+    if request.method == "POST":
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.attendees.add(request.user)
+        print("works")
+    # session = request.POST['signUp']
+    if request.method != "POST":
+        print("hello")
+    #print(session.id)
+    return HttpResponse(status=204)

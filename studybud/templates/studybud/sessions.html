@@ -24,8 +24,14 @@
                             <div class="col-2">
                                 {% comment %} <form method="post" {% endcomment %}
                                 {% comment %} <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a> {% endcomment %}
-                                <form action="#" method="post">
-                                    <a class="btn btn-primary float-end" href="#" role="button" value={{session.id}}>Sign Up</a>
+                                {% comment %} <form action="{% url 'signUp' %}" method="post">
+                                    {% csrf_token %}
+                                    <a class="btn btn-primary float-end" href="{% url 'signUp' %}" role="button" value={{session}} name="signUp">Sign Up</a>
+                                </form> {% endcomment %}
+                                <form name="signUp" method="post" action="{% url 'signUp' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="sessionid" value={{session.id}} />
+                                    <input type="submit" value="Sign up" />
                                 </form>
                             </div>
                            
