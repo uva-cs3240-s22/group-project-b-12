@@ -22,8 +22,13 @@
                                 </p>
                             </div>
                             <div class="col-2">
-                                <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a>
+                                {% comment %} <form method="post" {% endcomment %}
+                                {% comment %} <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a> {% endcomment %}
+                                <form action="#" method="post">
+                                    <a class="btn btn-primary float-end" href="#" role="button" value={{session.id}}>Sign Up</a>
+                                </form>
                             </div>
+                           
                         </div>
                     </div>
                 {% endfor %}

@@ -10,4 +10,8 @@
         <li class ="list-group-item bg-transparent list-group-item-success">Hosted by: {{ session.host.username }}</a></li>
         <li class ="list-group-item bg-transparent list-group-item-success">Here are additional details the creator left: {{ session.details }}</a></li>
     </ul>
+    <h4> Attendees </h4>
+    {% for attendee in session.attendees.all %}
+    {{attendee.username}}<br/>
+    {% endfor %}
 {% endblock %}

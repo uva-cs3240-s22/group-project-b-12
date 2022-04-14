@@ -7,7 +7,7 @@ from studybud.models import Session
 # Extending User Model Using a One-To-One Link
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    #signedUpSessions = models.ManyToManyField(Session)
+    
     bio = models.TextField()
 
     def __str__(self):
