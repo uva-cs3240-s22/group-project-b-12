@@ -24,7 +24,11 @@
                                 </div>                                
       
                                 <div class="col">
-                                <a class="btn btn-primary" href="#" role="button" onclick="location.href='{% url 'profilepage' %}'">Sign Up</a>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" value="{{session.id}}" name="session_id">
+                                            <button type="submit" class="btn btn-outline-primary" style="font-size:18px; border-radius: 50%">Sign Up</button>
+                                        </form>
                                 </div>
                             </div>
                         </div>
