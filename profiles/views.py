@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UpdateProfileForm
 from django.contrib import messages
 from .models import Profile
-
+from studybud.views import sessions
 
 # Create your views here.
 def loginView(request):
