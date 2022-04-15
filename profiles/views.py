@@ -49,4 +49,7 @@ def sendMessage(request, user_id):
     #print(User.objects.get(pk=request.POST[user_id]).email, False)
     # emailRecepient = User.objects.get(pk=request.POST[user_id])
     return render(request, 'profiles/sendMsg.html', {'emailRecepient': useri.email})
+
+def sendMessageGeneral(request):
+    return render(request, 'profiles/sendMsg.html', {'emailRecepient': ''})
         
