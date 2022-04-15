@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('profiles/', include('profiles.urls')),
+    path('profiles/', include('profiles.urls', namespace='profiles')),
     path('', views.sessionListView.as_view(), name='sessions'),
     #functional URL
     path('sessions/post/', views.postSession, name='postSession'),

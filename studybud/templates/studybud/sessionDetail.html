@@ -12,6 +12,6 @@
     </ul>
     <h4> Attendees </h4>
     {% for attendee in session.attendees.all %}
-    {{attendee.username}}<br/>
+    <a href="{% url 'profiles:viewProfile' attendee.id %}">{{attendee.username}}</a><br/>
     {% endfor %}
 {% endblock %}

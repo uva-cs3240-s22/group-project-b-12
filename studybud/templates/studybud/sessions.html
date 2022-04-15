@@ -31,7 +31,7 @@
                                 <form name="signUp" method="post" action="{% url 'signUp' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="sessionid" value={{session.id}} />
-                                    <input type="submit" value="Sign up" />
+                                    <input class="btn btn-primary float-end" type="submit" value="Sign up"/>
                                 </form>
                             </div>
                            

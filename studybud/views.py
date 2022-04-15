@@ -6,7 +6,7 @@ from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-
+from django.shortcuts import redirect
 
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
@@ -66,4 +66,4 @@ def SessionSignUp(request):
     if request.method != "POST":
         print("hello")
     #print(session.id)
-    return HttpResponse(status=204)
+    return redirect("/")
