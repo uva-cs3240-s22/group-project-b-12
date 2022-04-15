@@ -4,12 +4,12 @@ from django.contrib.auth.models import User
 
 
 # Extending User Model Using a One-To-One Link
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    bio = models.TextField()
-
-    def __str__(self):
-        return self.user.username
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+#     bio = models.TextField()
+#     classes = models.ManyToManyField(Courses)
+#     def __str__(self):
+#         return self.user.username
 
 class Test(models.Model):
     test = models.TextField()
@@ -31,3 +31,9 @@ class Courses(models.Model):
 #many to many field django 
     def __str__(self):
         return self.subject + self.catalog_number
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    bio = models.TextField()
+    classes = models.ManyToManyField(Courses)
+    def __str__(self):
+        return self.user.username

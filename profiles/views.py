@@ -48,7 +48,7 @@ def profile(request):
 
 
         print(name)
-        if name is not None: 
+        if name is not None and name != '': 
             name = name.split()
             subj = name[0]
             num = name[1]
@@ -72,7 +72,8 @@ def profile(request):
                         term_desc = i[12]  
                     )
                     courses_data.save()
-            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num)
+            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).distinct('class_number')
+
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes}) 
         else: 
             return render(request, 'profiles/profile.html', {'profile_form': profile_form})
