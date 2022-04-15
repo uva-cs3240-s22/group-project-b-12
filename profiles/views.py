@@ -11,6 +11,7 @@ from django.contrib import messages
 from .models import Profile
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect,get_object_or_404
+from django.http import HttpResponse
 
 # Create your views here.
 def loginView(request):
@@ -42,3 +43,10 @@ def profile(request):
 def viewProfile(request, user_id):
     useri = get_object_or_404(User, pk=user_id)
     return render(request, 'profiles/viewProfile.html', {'userInfo': useri})
+
+def sendMessage(request, user_id):
+    useri = get_object_or_404(User, pk=user_id)
+    #print(User.objects.get(pk=request.POST[user_id]).email, False)
+    # emailRecepient = User.objects.get(pk=request.POST[user_id])
+    return render(request, 'profiles/sendMsg.html', {'emailRecepient': useri.email})
+        
