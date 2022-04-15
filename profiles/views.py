@@ -9,7 +9,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import UpdateProfileForm
 from django.contrib import messages
 from .models import Profile
-
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect,get_object_or_404
+from django.http import HttpResponse
 
 # Create your views here.
 def loginView(request):
@@ -31,9 +33,20 @@ def profile(request):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
+            return redirect("/")
 
     else:
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
     return render(request, 'profiles/profile.html', {'profile_form': profile_form}) 
+
+def viewProfile(request, user_id):
+    useri = get_object_or_404(User, pk=user_id)
+    return render(request, 'profiles/viewProfile.html', {'userInfo': useri})
+
+def sendMessage(request, user_id):
+    useri = get_object_or_404(User, pk=user_id)
+    #print(User.objects.get(pk=request.POST[user_id]).email, False)
+    # emailRecepient = User.objects.get(pk=request.POST[user_id])
+    return render(request, 'profiles/sendMsg.html', {'emailRecepient': useri.email})
+        

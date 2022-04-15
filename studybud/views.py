@@ -5,8 +5,8 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
@@ -20,8 +20,8 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
 
 def postSession(request):
     if request.method == "POST":
-        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'])
-
+        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = request.POST['course'], host = User.objects.get(email=request.POST['Host']))
+        session.attendees.add(User.objects.get(email=request.POST['Host']))
         return HttpResponseRedirect(reverse('sessions'))
     else:
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
@@ -56,3 +56,14 @@ class SessionDetailView(generic.DetailView):
 
 def index(request):
     return render(request, 'studybud/index.html')
+
+def SessionSignUp(request):
+    if request.method == "POST":
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.attendees.add(request.user)
+        print("works")
+    # session = request.POST['signUp']
+    if request.method != "POST":
+        print("hello")
+    #print(session.id)
+    return redirect("/")
