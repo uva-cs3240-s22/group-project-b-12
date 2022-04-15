@@ -28,6 +28,6 @@ class Courses(models.Model):
     meeting_time_end = models.CharField(max_length=50, blank = True, null = True)
     term = models.CharField(max_length=50, blank = True, null = True)
     term_desc = models.CharField(max_length=50, blank = True, null = True)
-
+#many to many field django 
     def __str__(self):
         return self.subject + self.catalog_number

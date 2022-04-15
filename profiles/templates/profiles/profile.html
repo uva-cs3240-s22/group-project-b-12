@@ -20,7 +20,7 @@
                 <br><br>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <button type="reset" class="btn btn-primary">Reset</button>
-                <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
+                <!-- ADD CLASS BUTTON NEEDS BOOTSTRAPPING
                 <div class="form-row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -33,11 +33,12 @@
                                 </div>
                                 
                             </div>
-                  </div>  
+                  </div>   -->
 
                 <!--ADD CLASS DISPLAY-->
-            </div> 
+            <!-- </div> 
             <br><br>
+            {% if all_classes %}
             <div class="row">
               {% for course in all_classes %}
                 <div class="col-md-4 col-sm-6 col-lg-3">
@@ -45,7 +46,8 @@
                     <div class="card-body text-center">
                       <p class="card-title">{{ course.class_title }}</p>
                       <hr>
-                      <p class="card-text">{{ course.instructor }}</p>
+                      <p class="card-text">{{ course.subject }}</p>
+                      <p class="card-text">{{ course.catalog_number }}</p>
                       <a href="/profiles/{{courses.id}}"
                       ><input
                         type="submit"
@@ -59,10 +61,64 @@
                 </div>
               {% endfor %}
             </div>
-          </div>
+            {% else %}
+            <br>
+            <p class="text-center">
+                No classes added currently.
+            </p>
+        {% endif %}
+          </div> -->
             </form>
         </div>
     </div>
 </div>
-
+ <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
+ <div class="row justify-content-center text-center"></div>
+ <div class="form-row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="small mb-1">Add your classes</label>
+                <br>
+                 <form method="GET">
+                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
+                      <button type = "submit" class = "btn-light btn-sm">Search for Class</button>
+                 </form>  
+                </div>
+                
+            </div>
+  </div>  
+  </div
+</div> 
+<br><br>
+{% if all_classes %}
+<div class="row">
+  {% for course in all_classes %}
+    <div class="col-md-4 col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="card-title">{{ course.class_title }}</p>
+          <hr>
+          <p class="card-text">{{ course.instructor }}</p>
+          <p class="card-text">{{ course.subject}} {{ course.catalog_number }}</p>
+          <p class="card-text"> section: {{ course.class_section }}</p>
+          <a href="/profiles/{{courses.id}}"
+          ><input
+            type="submit"
+            value="Add Class"
+            class="btn btn-danger btn-sm"
+            type="button"
+        /></a>
+        </div>
+      </div>
+      <br><br><br>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<br>
+<p class="text-center">
+    No classes added currently.
+</p>
+{% endif %}
+</div>
 {% endblock content %}
