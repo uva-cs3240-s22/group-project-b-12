@@ -29,11 +29,21 @@ def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
     messages.success(request, request.user)
     if request.method == 'POST':
-        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
-        if profile_form.is_valid():
-            profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
+        # name = request.POST.get('coursesid')
+        # print(name)
+        # if name == 'toSave':
+        #     print('enters here')
+        #     classAdd = user.objects.get(id=request.POST['']).Profile
+        #     classAdd.classes.add(request.courses)
+        #     return render(request, 'profiles/profile.html')
+        # else: 
+            print('entered here')
+            profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
+            if profile_form.is_valid():
+                profile_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+                #return render(request, 'profiles/profile.html', {'profile_form': profile_form})
     elif request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)
         url =  'https://api.devhub.virginia.edu/v1/courses/'
@@ -53,8 +63,9 @@ def profile(request):
             subj = name[0]
             num = name[1]
             courses = data['class_schedules']['records']
+            course_display = set()
             for i in courses: 
-                if i[0] == subj and i[1] == num:
+                if i[0] == subj and i[1] == num and i[3] not in course_display:
                 #put this in a conditional 
                     courses_data = Courses(
                         subject= i[0],
@@ -70,10 +81,13 @@ def profile(request):
                         meeting_time_end =i[10],
                         term = i[11],
                         term_desc = i[12]  
+                    
                     )
+                    #subject, catalog number, class number, class title, instructor 
+                    course_display.add(i[3])
                     courses_data.save()
-            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).distinct('class_number')
-
+            print(course_display)
+            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes}) 
         else: 
             return render(request, 'profiles/profile.html', {'profile_form': profile_form})
@@ -83,9 +97,4 @@ def profile(request):
         return render(request, 'profiles/profile.html', {'profile_form': profile_form})
 
 
-#move entire thign into the profile view 
-
-         #   courses_data = Courses( #make this singular 
-      
-         #   all_classes = Courses.objects.all().order_by('-id') #change to filter by move to outside the for loop 
 
