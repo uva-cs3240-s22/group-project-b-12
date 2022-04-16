@@ -150,9 +150,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #UNCOMMENT THIS when deploying to heroku
 #TODO: Ask TA how to not have to do this everytime we deploy
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+# if '/app' in os.environ['HOME']:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
@@ -186,7 +186,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-CONTACT_EMAIL = 'jmj6ry@virginia.edu'
+CONTACT_EMAIL = 'b12studybud@gmail.com'
 ADMIN_EMAILS = ['jarodj2001@gmail.com']
 
 
@@ -195,4 +195,4 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST_PASSWORD = "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"
