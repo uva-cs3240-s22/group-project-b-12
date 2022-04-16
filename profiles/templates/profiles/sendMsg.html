@@ -1,6 +1,23 @@
 {% extends "profiles/base.html" %}
+{% load static %}
 {% block content %}
+{% load static %}
 
-{{emailRecepient}}
+<link rel="stylesheet" type="text/css" href="{% static 'emailForm.css' %}">
+{% if emailRecepient == null or emailRecepient == "" %}
+    <form action="" method = "post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit">
+    </form>
 
+
+{% else %}
+<h3> Send an Email to {{emailRecepient}}:</h3>
+    <form action="" method = "post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Submit">
+    </form>
+{% endif %}
 {% endblock content %}

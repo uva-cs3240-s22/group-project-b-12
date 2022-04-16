@@ -6,12 +6,14 @@ from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateProfileForm
+from .forms import UpdateProfileForm, ContactForm, ContactFormFilled
 from django.contrib import messages
-from .models import Profile
+from .models import Profile, Contact
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponse
+from django.conf import settings
+from django.core.mail import send_mail
 
 # Create your views here.
 def loginView(request):
@@ -46,10 +48,34 @@ def viewProfile(request, user_id):
 
 def sendMessage(request, user_id):
     useri = get_object_or_404(User, pk=user_id)
-    #print(User.objects.get(pk=request.POST[user_id]).email, False)
-    # emailRecepient = User.objects.get(pk=request.POST[user_id])
-    return render(request, 'profiles/sendMsg.html', {'emailRecepient': useri.email})
+    if request.method == 'POST':
+        form = ContactFormFilled(request.POST)
+        if form.is_valid():
+            form.save()
+            email_subject = f'Studybud: New Message from {useri.email}: {form.cleaned_data["subject"]}'
+            email_message = form.cleaned_data['message']
+            print(settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            settings.ADMIN_EMAILS = [useri.email]
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            return render(request, 'profiles/emailSent.html')
+    
+    form = ContactFormFilled()
+    form.Meta.email = useri.email
+    context = {'emailRecepient': useri.email,'form': form}
+    return render(request, 'profiles/sendMsg.html', context)
 
 def sendMessageGeneral(request):
-    return render(request, 'profiles/sendMsg.html', {'emailRecepient': ''})
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email_subject = f'Studybud: New Message from {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
+            email_message = form.cleaned_data['message']
+            print(settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            settings.ADMIN_EMAILS = [form.cleaned_data["email"]]
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAILS)
+            return render(request, 'profiles/emailSent.html')
+    form = ContactForm()
+    context = {'form': form}
+    return render(request, 'profiles/sendMsg.html', context)
         
