@@ -8,7 +8,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateProfileForm
 from django.contrib import messages
-from .models import Profile, Courses
+from .models import Profile, Courses, Course
 import requests
 from django.utils.datastructures import MultiValueDictKeyError
 
@@ -28,23 +28,26 @@ def logoutView(request):
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
     messages.success(request, request.user)
-    if request.method == 'POST':
-        # name = request.POST.get('coursesid')
+    courses = request.user.profile.courses.all()
+    print(courses)
+    # if request.method == 'POST':
+    #     name = request.POST.get('coursesid')
+    #     print(name, "!!!")
         # print(name)
         # if name == 'toSave':
         #     print('enters here')
         #     classAdd = user.objects.get(id=request.POST['']).Profile
         #     classAdd.classes.add(request.courses)
         #     return render(request, 'profiles/profile.html')
-        # else: 
-            print('entered here')
-            profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
-            if profile_form.is_valid():
-                profile_form.save()
-                messages.success(request, 'Your profile is updated successfully')
-                return redirect(to='users-profile')
-                #return render(request, 'profiles/profile.html', {'profile_form': profile_form})
-    elif request.method == 'GET':
+    # else: 
+    #     print('entered here')
+    #     profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
+    #     if profile_form.is_valid():
+    #         profile_form.save()
+    #         messages.success(request, 'Your profile is updated successfully')
+    #         return redirect(to='users-profile')
+            #return render(request, 'profiles/profile.html', {'profile_form': profile_form})
+    if request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)
         url =  'https://api.devhub.virginia.edu/v1/courses/'
         response = requests.get(url)
@@ -88,13 +91,31 @@ def profile(request):
                     courses_data.save()
             print(course_display)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
-            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes}) 
+            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'courses': courses}) 
         else: 
-            return render(request, 'profiles/profile.html', {'profile_form': profile_form})
+            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'courses': courses})
     else:
         profile_form = UpdateProfileForm(instance=request.user.profile)
         
-        return render(request, 'profiles/profile.html', {'profile_form': profile_form})
+        return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'courses': courses})
 
+def addCourse(request):
+    if request.method == 'POST':
+        courseInstructor = request.POST['courseInstructor']
+        courseSubject = request.POST['courseSubject']
+        courseCatNum = request.POST['courseCatNum']
+        user = request.user
+        print(courseInstructor)
+        print(courseSubject)
+        print(courseCatNum)
 
+        #If course object doesn't already exist, create it
+        if len(Course.objects.filter(instructor=courseInstructor, subject=courseSubject, catalog_number=courseCatNum)) == 0:
+             user.profile.courses.create(instructor=courseInstructor, catalog_number = courseCatNum, subject = courseSubject)
+        #Else, add course object to user's courses
+        else:
+            course = Course.objects.get(instructor=courseInstructor, catalog_number = courseCatNum, subject = courseSubject)
+            user.profile.courses.add(course)
+        
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

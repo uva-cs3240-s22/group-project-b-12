@@ -28,6 +28,12 @@ class Courses(models.Model):
     meeting_time_end = models.CharField(max_length=50, blank = True, null = True)
     term = models.CharField(max_length=50, blank = True, null = True)
     term_desc = models.CharField(max_length=50, blank = True, null = True)
+
+class Course(models.Model):
+    instructor = models.CharField(max_length=50, blank = True, null = True)
+    catalog_number = models.CharField(max_length=10, blank = True, null = True)
+    subject= models.CharField(max_length=50, blank = True, null = True)
+
 #many to many field django 
     def __str__(self):
         return self.subject + self.catalog_number
@@ -35,5 +41,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     bio = models.TextField()
     classes = models.ManyToManyField(Courses)
+    courses = models.ManyToManyField(Course)
     def __str__(self):
         return self.user.username
