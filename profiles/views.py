@@ -117,5 +117,6 @@ def addCourse(request):
             course = Course.objects.get(instructor=courseInstructor, catalog_number = courseCatNum, subject = courseSubject)
             user.profile.courses.add(course)
         
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
+
 

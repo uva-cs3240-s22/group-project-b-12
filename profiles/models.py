@@ -29,6 +29,7 @@ class Courses(models.Model):
     term = models.CharField(max_length=50, blank = True, null = True)
     term_desc = models.CharField(max_length=50, blank = True, null = True)
 
+# New course model because we don't need more field
 class Course(models.Model):
     instructor = models.CharField(max_length=50, blank = True, null = True)
     catalog_number = models.CharField(max_length=10, blank = True, null = True)
