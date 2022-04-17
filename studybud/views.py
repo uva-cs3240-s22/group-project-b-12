@@ -15,15 +15,31 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
     context_object_name = 'session_list'
     #session_list = Session.objects.all()
                                     #objects.filter(date__gte=timezone.now())
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         user = self.request.user
+        
         try:
+            filter = self.request.GET.get('course', 'all')
             courses = user.profile.courses.all()
-            k = Session.objects.filter(course__in = courses)
-            return k
+
+            if (filter=='all'):
+                sessions = Session.objects.filter(course__in = courses) 
+            else: 
+                sessions = Session.objects.filter(course=filter)
+
+            return sessions
         except:
             return []
-     
+            
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        user = self.request.user
+        courses = user.profile.courses.all()
+        context['courses'] = courses
+        return context
+    
 
 def postSession(request):
     if request.method == "POST":
