@@ -74,7 +74,7 @@ class PostSessionTest(TestCase):
         s = Session(attendees=1, date="2022-03-26 20:40:02.541566+00:00", location="test0002", details="This session is being created as a test.", course = a)
         s.save()
         self.assertEqual(s.details,"This session is being created as a test.")
-        
+    
     # To test that study sessions require a course (can't be null)
     # Expected result: Course s doesn't save successfully
     def test_course_one_to_one_relationship(self):
