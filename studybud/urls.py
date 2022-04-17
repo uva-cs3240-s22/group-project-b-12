@@ -30,5 +30,7 @@ urlpatterns = [
     path('sessions/submit/', views.SessionPostView.as_view(), name='submitSession'),
     #Clicking on the Session object takes you to it's specific detail view
     path('sessions/<int:pk>/', views.SessionDetailView.as_view(), name='sessionDetail'),
+    #Dropdown list for courses 
+    path('showlist/', views.showlist, name='showlist'),
     
 ] 

@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from profiles.models import Profile
 
 
 
@@ -50,7 +51,10 @@ class SessionDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Session.objects.all()
-
+#this is the views I added to get hte courses to populate the dropdown
+def showlist(request): #reference: https://tutorial101.blogspot.com/2020/07/python-django-simple-dropdown-list.html 
+    results=Profile.courses.objects.all()
+    return render(request, "studybud/sessionSubmit.html",{"courselist":results})
 # class indexView(generic.DetailView):
 #     template_name = 'studybud/index.html'
 

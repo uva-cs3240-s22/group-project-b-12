@@ -39,7 +39,14 @@
                                   placeholder="Details"></textarea>
                         <small id="maxcharacter" class="form-text">Maximum of 250 characters.</small>
                     </div>
-                    <div>
+                    <!-- THIS IS TO MAKE THE DROPDOWN  -->
+                    <p><b>Course : </b> 
+                        <select name="course" class="form-control">
+                  {% for results in courselist %}
+                           <option value="{{ results.id}}">{{ results.name}}</option>
+                  {% endfor %}
+                        </select>
+                    <!-- <div>
                         <input type="text"
                                class="form-control"
                                placeholder="Course (in 'APMA 1000' format)"
@@ -47,7 +54,7 @@
                                name="course"
                                required>
                         <br>
-                    </div>
+                    </div> -->
                     {% buttons submit='Submit' %}
                 {% endbuttons %}
             </form>
