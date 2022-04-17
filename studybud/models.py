@@ -23,4 +23,4 @@ class Session(models.Model):
         return now<=self.date
 
     def __str__(self):
-        return "Study session with "+str(self.attendees)+"attendees at "+ self.location+ " on "+str(self.date)+" for "+ str(self.course.first())+". Here are any additional details: " +self.details+ "."
+        return "Study session with "+str(self.attendees)+"attendees at "+ self.location+ " on "+str(self.date)+" for "+ str(self.course)+". Here are any additional details: " +self.details+ "."
