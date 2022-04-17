@@ -89,7 +89,7 @@ def profile(request):
                     )
                     #subject, catalog number, class number, class title, instructor 
                     course_display.add(i[3])
-                    #courses_data.save()
+                    courses_data.save()
             print(course_display)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'courses': courses}) 
