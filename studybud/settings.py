@@ -16,6 +16,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -150,9 +151,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #UNCOMMENT THIS when deploying to heroku
 #TODO: Ask TA how to not have to do this everytime we deploy
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+# if '/app' in os.environ['HOME']:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 SITE_ID = 1
@@ -165,14 +166,14 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
 
 # Source: https://sandeepsajan0.medium.com/send-email-in-django-app-with-sendgrid-a009bf19a389
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = '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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -186,13 +187,13 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-CONTACT_EMAIL = 'b12studybud@gmail.com'
+CONTACT_EMAIL = 'studybudb12@gmail.com'
 ADMIN_EMAILS = ['jarodj2001@gmail.com']
 
 
 # Twilio SendGrid
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = "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"
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD = "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"
