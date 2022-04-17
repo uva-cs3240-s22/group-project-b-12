@@ -8,3 +8,43 @@ client id:
 893857578765-v51ojliqsdee9j3oehmanetcln0rg79h.apps.googleusercontent.com
 client secret:
 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
+http://127.0.0.1:8000/profiles/?redirect_to=/
+
+  <div class="text-center">
+            <form role="form" name="selectCourse" method="post" action="{% url 'sessions' %}">
+                {% csrf_token %}
+                <select id="course" name="course"  >
+                    <option value="all" selected>All</option>
+                    {% for course in courses %}
+                        <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
+                    {% endfor %}
+                </select>
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+        
+@login_required
+def sessionListView(request):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
+    user = request.user
+        #     coursei = self.request.GET["course"]
+        #     k = Session.objects.filter(course = coursei)
+        #     return k
+    
+    try:
+        courses = user.profile.courses.all() 
+        sessions = Session.objects.filter(course__in = courses)
+    except:
+        courses =[]
+        sessions = []
+
+    if request.method == 'POST':
+        selectedCourse = request.POST['course']
+        if selectedCourse == 'all':
+            courses = user.profile.courses.all() 
+            sessions = Session.objects.filter(course__in = courses)  
+        else: 
+            sessions = Session.objects.filter(course=request.POST['course'])
+
+    return render(request, 'studybud/sessions.html', {'sessions_list': sessions, 'courses' : courses} )

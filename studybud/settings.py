@@ -144,15 +144,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
-#UNCOMMENT THIS when deploying to heroku
-#TODO: Ask TA how to not have to do this everytime we deploy
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+# if '/app' in os.environ['HOME']:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
+
+# BELOW IS WHAT THE TA SUGGESTED TO USE
+# Activate Django-Heroku.
+try:
+    # Configure Django App for Heroku.
+    import django_heroku
+
+    # test_runner=False disables heroku deps while testing in travis
+    django_heroku.settings(locals(), test_runner=False)
+except ImportError:
+    pass
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profiles'
 LOGOUT_REDIRECT_URL = '/profiles'
@@ -162,15 +173,6 @@ ACCOUNT_LOGOUT_ON_GET= True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_LOGIN_ON_GET=True
-
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-
-# Source: https://sandeepsajan0.medium.com/send-email-in-django-app-with-sendgrid-a009bf19a389
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {

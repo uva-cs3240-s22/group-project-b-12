@@ -8,7 +8,18 @@
     {% if session_list %}
         <div class="row justify-content-center">
             <div class="col-5">
-                
+                 <div class="text-center">
+                    <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
+                        {% csrf_token %}
+                        <select id="course" name="course"  >
+                            <option value="all" selected>All</option>
+                            {% for course in courses %}
+                                <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
+                            {% endfor %}
+                        </select>
+                        <button type="submit" value="Submit">Submit</button>
+                    </form> 
+                </div>
                 {% for session in session_list %}
                     <div class="row session"
                          onclick="location.href='{% url 'sessionDetail' session.id %}'">
@@ -22,19 +33,8 @@
                                 </p>
                             </div>
                             <div class="col-2">
-                                {% comment %} <form method="post" {% endcomment %}
-                                {% comment %} <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a> {% endcomment %}
-                                {% comment %} <form action="{% url 'signUp' %}" method="post">
-                                    {% csrf_token %}
-                                    <a class="btn btn-primary float-end" href="{% url 'signUp' %}" role="button" value={{session}} name="signUp">Sign Up</a>
-                                </form> {% endcomment %}
-                                <form name="signUp" method="post" action="{% url 'signUp' %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="sessionid" value={{session.id}} />
-                                    <input class="btn btn-primary float-end" type="submit" value="Sign up"/>
-                                </form>
+                                <a class="btn btn-primary float-end" href="#" role="button">Sign Up</a>
                             </div>
-                           
                         </div>
                     </div>
                 {% endfor %}
