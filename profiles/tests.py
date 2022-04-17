@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from django.test import Client
 from django.contrib import auth
+
 from .models import Profile, Course
 
 class accountTest(TestCase):
@@ -115,12 +116,3 @@ class CoursesTest(TestCase):
 
     # def login(self):
     #     self.client.login(username='alen', password='test')
-    
-    # def test_connected_user_should_be_logged_in(self):
-    #     user = self.create_user()
-        
-    #     self.assertTrue(self.client.session.get('_auth_user_id', False))
-    
-    # def tester2(self):
-    #     j = 2
-    #     self.assertEqual(j,2)#TODO: Edit tests to accomodate new models

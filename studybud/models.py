@@ -2,8 +2,9 @@ from django.db import models
 from django.utils import timezone
 import datetime
 from profiles.models import Course
+from django.contrib.auth.models import User
+
 class Session(models.Model):
-    attendees = models.IntegerField(default = 1)
     #Maybe separate day and time as different fields at another point to more easily filter the session objects
     date = models.DateTimeField('meeting date')
     location = models.CharField(max_length=250)
@@ -12,7 +13,8 @@ class Session(models.Model):
 
     #Description of the purpose of the session
     details = models.TextField(max_length = 250)
-
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
+    attendees = models.ManyToManyField(User, related_name="users_attending") # Related_name field necessary to prevent reverse clash. Source: https://stackoverflow.com/questions/26955319/django-reverse-accessor-clashes
     #Want to use this function in ListView somehow.
     #   No need to see past studySessions (also no need to see filled sessions)
     #   Another alternative to this is using .filter in View return statement:
