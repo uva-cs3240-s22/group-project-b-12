@@ -166,15 +166,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
-
-
-# Source: https://sandeepsajan0.medium.com/send-email-in-django-app-with-sendgrid-a009bf19a389
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = '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'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -187,13 +178,3 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-CONTACT_EMAIL = 'studybudb12@gmail.com'
-ADMIN_EMAILS = ['jarodj2001@gmail.com']
-
-
-# Twilio SendGrid
-# EMAIL_HOST = 'smtp.sendgrid.net'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'apikey'
-# EMAIL_HOST_PASSWORD = "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"
