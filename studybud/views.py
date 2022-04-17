@@ -20,14 +20,10 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
         try:
             courses = user.profile.courses.all()
             k = Session.objects.filter(course__in = courses)
-            for session in k:
-                print(session)
-            for session in Session.objects.all():
-                print(session)
-            print("--------")
+            return k
         except:
-            pass
-        return Session.objects.all()
+            return []
+     
 
 def postSession(request):
     if request.method == "POST":
