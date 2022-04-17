@@ -1,6 +1,7 @@
 {% extends 'studybud/base.html' %}
 {% load bootstrap5 %}
 {% block content %}
+
     <div class="container">
         <div class="row justify-content-center mt-4">
             <h1 style="text-align:center;">Post a New Trip</h1>
@@ -39,7 +40,7 @@
                                   placeholder="Details"></textarea>
                         <small id="maxcharacter" class="form-text">Maximum of 250 characters.</small>
                     </div>
-                    <div>
+                    {% comment %} <div>
                         <input type="text"
                                class="form-control"
                                placeholder="Course (in 'APMA 1000' format)"
@@ -47,7 +48,14 @@
                                name="course"
                                required>
                         <br>
-                    </div>
+                    </div> {% endcomment %}
+                    <label for="courses">Choose a course:</label>
+                    <select id="course" name="course">
+                        {% for course in courses %}
+                             <option value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>
+                            
+                        {% endfor %}
+                    </select>
                     {% buttons submit='Submit' %}
                 {% endbuttons %}
             </form>

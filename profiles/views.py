@@ -24,13 +24,15 @@ def logoutView(request):
     logout(request)
     return redirect("/")
 
+
+
 @login_required
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
     messages.success(request, request.user)
     courses = request.user.profile.courses.all()
     print(courses)
-    # if request.method == 'POST':
+    if request.method == 'POST':
     #     name = request.POST.get('coursesid')
     #     print(name, "!!!")
         # print(name)
@@ -40,14 +42,13 @@ def profile(request):
         #     classAdd.classes.add(request.courses)
         #     return render(request, 'profiles/profile.html')
     # else: 
-    #     print('entered here')
-    #     profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
-    #     if profile_form.is_valid():
-    #         profile_form.save()
-    #         messages.success(request, 'Your profile is updated successfully')
-    #         return redirect(to='users-profile')
-            #return render(request, 'profiles/profile.html', {'profile_form': profile_form})
-    if request.method == 'GET':
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='users-profile')
+            return render(request, 'profiles/profile.html', {'profile_form': profile_form})
+    elif request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)
         url =  'https://api.devhub.virginia.edu/v1/courses/'
         response = requests.get(url)
