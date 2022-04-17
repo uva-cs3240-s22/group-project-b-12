@@ -36,8 +36,11 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         user = self.request.user
-        courses = user.profile.courses.all()
-        context['courses'] = courses
+        try:
+            courses = user.profile.courses.all()
+            context['courses'] = courses
+        except:
+            context['courses'] = []
         return context
     
 
