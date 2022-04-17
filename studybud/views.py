@@ -16,13 +16,25 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
     #session_list = Session.objects.all()
                                     #objects.filter(date__gte=timezone.now())
     def get_queryset(self):
+        user = self.request.user
+        try:
+            courses = user.profile.courses.all()
+            k = Session.objects.filter(course__in = courses)
+            for session in k:
+                print(session)
+            for session in Session.objects.all():
+                print(session)
+            print("--------")
+        except:
+            pass
         return Session.objects.all()
 
 def postSession(request):
     if request.method == "POST":
         courseID = request.POST["course"]
         coursei = Course.objects.get(id=courseID)
-        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course = coursei)
+        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = request.POST['details'], course=coursei)
+      
         return HttpResponseRedirect(reverse('sessions'))
     else:
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
