@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 #import django_heroku
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -176,15 +179,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
 SOCIALACCOUNT_LOGIN_ON_GET=True
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-
-# Source: https://sandeepsajan0.medium.com/send-email-in-django-app-with-sendgrid-a009bf19a389
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -196,3 +190,4 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+

@@ -11,4 +11,6 @@ urlpatterns = [
     path('addCourse', views.addCourse, name='addCourse'),
     path('<int:user_id>/', views.viewProfile, name='viewProfile'),
     path('sendMessage/<int:user_id>/', views.sendMessage, name='sendMessage'),
+    path('sendMessage/', views.sendMessageGeneral, name='sendMessageGeneral'),
 ]
+
