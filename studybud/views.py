@@ -59,7 +59,7 @@ def postSession(request):
 class SessionPostView(generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
-    template_name = 'studybud/sessionSubmit.html, {var: 1}'
+    template_name = 'studybud/sessionSubmit.html'
     context_object_name = 'session_list'
     session_list = Session.objects.all()
  

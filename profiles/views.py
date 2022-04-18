@@ -144,8 +144,9 @@ def sendMessage(request, user_id):
             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
             email_subject = f'Studybud: New Message from {useri.email}: {form.cleaned_data["subject"]}'
             email_message = form.cleaned_data['message']
-            from_email = Email("jmj6ry@virginia.edu")
-            to_email = useri.email
+            from_email = "jmj6ry@virginia.edu"
+            to_email = "anjesat@outlook.com"
+            print(SENDGRID_API_KEY)
             mail = Mail(from_email, to_email, email_subject, email_message)
             sg.client.mail.send.post(request_body=mail.get())
             return render(request, 'profiles/emailSent.html')
