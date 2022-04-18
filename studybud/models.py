@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+from profiles.models import Course
 from django.contrib.auth.models import User
 
 class Session(models.Model):
@@ -8,7 +9,8 @@ class Session(models.Model):
     date = models.DateTimeField('meeting date')
     location = models.CharField(max_length=250)
     #Max length for UVA course format ('APMA 2130')
-    course = models.CharField(max_length = 9)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
     #Description of the purpose of the session
     details = models.TextField(max_length = 250)
     host = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,4 +25,4 @@ class Session(models.Model):
         return now<=self.date
 
     def __str__(self):
-        return "Study session with "+str(self.attendees)+" attendees at "+ self.location+ " on "+str(self.date)+" for "+self.course+ ". Hosted by " + self.host.username + ". Here are any additional details: " +self.details+ "."
+        return "Study session with "+str(self.attendees)+"attendees at "+ self.location+ " on "+str(self.date)+" for "+ str(self.course)+". Here are any additional details: " +self.details+ "."

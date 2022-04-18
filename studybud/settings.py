@@ -147,15 +147,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 # source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
 
 #UNCOMMENT THIS when deploying to heroku
 #TODO: Ask TA how to not have to do this everytime we deploy
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
+# if '/app' in os.environ['HOME']:
+#     import django_heroku
+#     django_heroku.settings(locals())
 
 # Additional login config settings, source: https://dev.to/mdrhmn/django-google-authentication-using-django-allauth-18f8
+
+# BELOW IS WHAT THE TA SUGGESTED TO USE
+# Activate Django-Heroku.
+try:
+    # Configure Django App for Heroku.
+    import django_heroku
+
+    # test_runner=False disables heroku deps while testing in travis
+    django_heroku.settings(locals(), test_runner=False)
+except ImportError:
+    pass
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/profiles'
 LOGOUT_REDIRECT_URL = '/profiles'

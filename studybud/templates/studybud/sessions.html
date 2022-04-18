@@ -8,7 +8,18 @@
     {% if session_list %}
         <div class="row justify-content-center">
             <div class="col-5">
-                
+                 <div class="text-center">
+                    <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
+                        {% csrf_token %}
+                        <select id="course" name="course"  >
+                            <option value="all" selected>All</option>
+                            {% for course in courses %}
+                                <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
+                            {% endfor %}
+                        </select>
+                        <button type="submit" value="Submit">Submit</button>
+                    </form> 
+                </div>
                 {% for session in session_list %}
                     <div class="row session"
                          onclick="location.href='{% url 'sessionDetail' session.id %}'">
