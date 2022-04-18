@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.contrib.auth.models import User
-from studybud.models import Session
 
 # Source: https://dev.to/earthcomfy/django-user-profile-3hik
 
