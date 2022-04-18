@@ -11,8 +11,10 @@ from django.contrib import messages
 from .models import Profile, Courses, Course
 import requests
 from django.utils.datastructures import MultiValueDictKeyError
-
-
+from .models import Profile
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect,get_object_or_404
+from django.http import HttpResponse
 
 # Create your views here.
 def loginView(request):
@@ -24,8 +26,7 @@ def logoutView(request):
     logout(request)
     return redirect("/")
 
-
-
+# Source: https://dev.to/earthcomfy/django-user-profile-3hik
 @login_required
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
@@ -59,7 +60,6 @@ def profile(request):
             name = request.GET.get('name')
         except MultiValueDictKeyError:
             name = False
-
 
         print(name)
         if name is not None and name != '': 
@@ -120,4 +120,13 @@ def addCourse(request):
         
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
 
+def viewProfile(request, user_id):
+    useri = get_object_or_404(User, pk=user_id)
+    return render(request, 'profiles/viewProfile.html', {'userInfo': useri})
+
+def sendMessage(request, user_id):
+    useri = get_object_or_404(User, pk=user_id)
+    #print(User.objects.get(pk=request.POST[user_id]).email, False)
+    # emailRecepient = User.objects.get(pk=request.POST[user_id])
+    return render(request, 'profiles/sendMsg.html', {'emailRecepient': useri.email})
 

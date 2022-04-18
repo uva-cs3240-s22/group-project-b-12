@@ -137,8 +137,4 @@ GitHub.sublime-settings
 .history
 group-project.code-workspace
 
-test.txt
-test.txt
-.gitignore
-.gitignore
-test.txt
+test.py

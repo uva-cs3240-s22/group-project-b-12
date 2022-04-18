@@ -1,15 +1,9 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+from studybud.models import Session
 
-
-# Extending User Model Using a One-To-One Link
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     bio = models.TextField()
-#     classes = models.ManyToManyField(Courses)
-#     def __str__(self):
-#         return self.user.username
+# Source: https://dev.to/earthcomfy/django-user-profile-3hik
 
 class Test(models.Model):
     test = models.TextField()

@@ -1,10 +1,12 @@
 {% extends 'studybud/base.html' %}
 {% load bootstrap5 %}
 {% block content %}
+{% load socialaccount %}
+
 
     <div class="container">
         <div class="row justify-content-center mt-4">
-            <h1 style="text-align:center;">Post a New Trip</h1>
+            <h1 style="text-align:center;">Post a New Session</h1>
             <div class="col-6 align-items-center ">
                 <form role="form" action="{% url 'postSession' %}" method = "post">
                     {% csrf_token %}
@@ -47,6 +49,13 @@
                             
                         {% endfor %}
                     </select>
+                    <div>
+                        <input type="hidden"
+                               id="Host"
+                               name="Host"
+                               value={{user.email}}>
+                        <br>
+                    </div>
                     {% buttons submit='Submit' %}
                 {% endbuttons %}
             </form>
