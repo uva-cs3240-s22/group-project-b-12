@@ -114,24 +114,24 @@ class CoursesTest(TestCase):
         p.courses.add(b)
         p.courses.add(c)
     
-# class EmailApiTest(TestCase):
-#     env = environ.Env()
-#     environ.Env.read_env()
+class EmailApiTest(TestCase):
+    env = environ.Env()
+    environ.Env.read_env()
 
-#     # To check that emails send successfully
-#     def test_email_api(self):
-#         env = environ.Env()
-#         environ.Env.read_env()
-#         try:
-#                 SENDGRID_API_KEY = env('SENDGRID_API_KEY1')
-#         except:
-#             pass
+    # To check that emails send successfully
+    def test_email_api(self):
+        env = environ.Env()
+        environ.Env.read_env()
+        try:
+                SENDGRID_API_KEY = env('SENDGRID_API_KEY1')
+        except:
+            pass
 
-#         sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-#         email_subject = "test"
-#         email_message = "testing"
-#         from_email = "b12studybud@gmail.com"
-#         to_email = "anjesat@outlook.com"
-#         mail = Mail(from_email, to_email, email_subject, email_message)
-#         response = sg.client.mail.send.post(request_body=mail.get())
-#         self.assertEqual(response.status_code, 202)
+        sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
+        email_subject = "test"
+        email_message = "testing"
+        from_email = "b12studybud@gmail.com"
+        to_email = "anjesat@outlook.com"
+        mail = Mail(from_email, to_email, email_subject, email_message)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        self.assertEqual(response.status_code, 202)
