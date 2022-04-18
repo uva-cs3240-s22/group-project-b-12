@@ -65,7 +65,7 @@
             {{entry}}
           {% endfor %}     {% endcomment %}
 
-          <form name="toSave" method="post" action="{% url 'addCourse' %}">
+          <form name="toSave" method="post" action="{% url 'profiles:addCourse' %}">
             {% csrf_token %}
             <input type="hidden" name="courseInstructor" value={{course.instructor}} />
             <input type="hidden" name="courseSubject" value={{course.subject}} />

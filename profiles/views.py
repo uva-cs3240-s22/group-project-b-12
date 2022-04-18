@@ -47,8 +47,7 @@ def profile(request):
         if profile_form.is_valid():
             profile_form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
-            return render(request, 'profiles/profile.html', {'profile_form': profile_form})
+            return redirect(to='profiles:users-profile')
     elif request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)
         url =  'https://api.devhub.virginia.edu/v1/courses/'
@@ -116,8 +115,7 @@ def addCourse(request):
         #Else, add course object to user's courses
         else:
             course = Course.objects.get(instructor=courseInstructor, catalog_number = courseCatNum, subject = courseSubject)
-            user.profile.courses.add(course)
-        
+            user.profile.courses.add(course)  
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
 
 def viewProfile(request, user_id):
