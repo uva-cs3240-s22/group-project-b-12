@@ -78,7 +78,7 @@ def profile(request):
             courses = data['class_schedules']['records']
             course_display = set()
             for i in courses: 
-                if i[0] == subj and i[1] == num and i[3] not in course_display:
+                if i[0] == subj and i[1] == num and (i[8],i[9]) not in course_display:
                 #put this in a conditional 
                     courses_data = Courses(
                         subject= i[0],
@@ -97,7 +97,7 @@ def profile(request):
                     
                     )
                     #subject, catalog number, class number, class title, instructor 
-                    course_display.add(i[3])
+                    course_display.add(i[8],i[9])
                     courses_data.save()
             print(course_display)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
