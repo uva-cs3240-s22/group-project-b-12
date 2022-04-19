@@ -97,7 +97,7 @@ def profile(request):
                     
                     )
                     #subject, catalog number, class number, class title, instructor 
-                    course_display.add(i[8],i[9])
+                    course_display.add((i[8],i[9]))
                     courses_data.save()
             print(course_display)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
