@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from studybud.models import Session
+from studybud.models import Spot
 from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
@@ -113,3 +114,8 @@ def SessionSignUp(request):
 
 class studySpots(generic.DetailView):
     template_name='studybud/studySpots.html'
+    login_url = '/profiles/'
+    model = Spot
+
+    def get_queryset(self):
+        return Spot.objects.all()

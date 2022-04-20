@@ -26,3 +26,6 @@ class Session(models.Model):
 
     def __str__(self):
         return "Study session with "+str(self.attendees)+"attendees at "+ self.location+ " on "+str(self.date)+" for "+ str(self.course)+". Here are any additional details: " +self.details+ "."
+
+class Spot(models.Model):
+    location= models.CharField(max_length=250)
