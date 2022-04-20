@@ -110,3 +110,6 @@ def SessionSignUp(request):
         print("hello")
     #print(session.id)
     return redirect("/")
+
+class studySpots(generic.DetailView):
+    template_name='studybud/studySpots.html'
