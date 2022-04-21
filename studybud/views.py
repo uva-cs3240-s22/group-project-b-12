@@ -113,7 +113,7 @@ def SessionSignUp(request):
     return redirect("/")
 
     
-class profileView(generic.ListView):
+class studySpots(generic.ListView):
     template_name='studybud/studySpots.html'
     context_object_name = 'spot_list'
     #session_list = Session.objects.all()
