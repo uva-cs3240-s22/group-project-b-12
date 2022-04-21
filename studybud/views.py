@@ -112,10 +112,12 @@ def SessionSignUp(request):
     #print(session.id)
     return redirect("/")
 
-class studySpots(generic.DetailView):
+    
+class profileView(generic.ListView):
     template_name='studybud/studySpots.html'
-    login_url = '/profiles/'
-    model = Spot
+    context_object_name = 'spot_list'
+    #session_list = Session.objects.all()
+                                    #objects.filter(date__gte=timezone.now())
 
     def get_queryset(self):
         return Spot.objects.all()
