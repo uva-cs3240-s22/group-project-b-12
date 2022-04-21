@@ -118,6 +118,6 @@ class profileView(generic.ListView):
     context_object_name = 'spot_list'
     #session_list = Session.objects.all()
                                     #objects.filter(date__gte=timezone.now())
-
+    spot_list = Spot.objects.all()
     def get_queryset(self):
         return Spot.objects.all()
