@@ -27,10 +27,14 @@
         </div>
     </div>
 </div>
-<h3> Classes Enrolled In </h3>
-{% for course in courses%}
-  <p>{{course.subject}} {{course.catalog_number}}</p>
-{% endfor %}
+<h3> Classes Enrolled In: </h3>
+{% if coursesEnrolledIn %}
+  {% for course in coursesEnrolledIn%}
+    <p>{{course.subject}} {{course.catalog_number}}</p>
+  {% endfor %}
+{% else %}
+  You are currently not enrolled in any courses.
+{%endif%}
 
  <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
  <div class="row justify-content-center text-center"></div>

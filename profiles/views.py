@@ -41,8 +41,7 @@ def logoutView(request):
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
     messages.success(request, request.user)
-    courses = request.user.profile.courses.all()
-    print(courses)
+    coursesEnrolledIn = request.user.profile.courses.all()
     if request.method == 'POST':
     #     name = request.POST.get('coursesid')
     #     print(name, "!!!")
@@ -101,13 +100,13 @@ def profile(request):
                     courses_data.save()
             print(course_display)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
-            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'courses': courses}) 
+            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'coursesEnrolledIn': coursesEnrolledIn}) 
         else: 
-            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'courses': courses})
+            return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'coursesEnrolledIn': coursesEnrolledIn})
     else:
         profile_form = UpdateProfileForm(instance=request.user.profile)
         
-        return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'courses': courses})
+        return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'coursesEnrolledIn': coursesEnrolledIn})
 
 def addCourse(request):
     if request.method == 'POST':
@@ -115,9 +114,6 @@ def addCourse(request):
         courseSubject = request.POST['courseSubject']
         courseCatNum = request.POST['courseCatNum']
         user = request.user
-        print(courseInstructor)
-        print(courseSubject)
-        print(courseCatNum)
 
         #If course object doesn't already exist, create it
         if len(Course.objects.filter(instructor=courseInstructor, subject=courseSubject, catalog_number=courseCatNum)) == 0:
