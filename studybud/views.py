@@ -110,3 +110,43 @@ def SessionSignUp(request):
         print("hello")
     #print(session.id)
     return redirect("/")
+
+class mySessionsListView(LoginRequiredMixin,generic.ListView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
+    template_name='studybud/mySessions.html'
+    context_object_name = 'session_list'
+
+    def get_queryset(self, **kwargs):
+        user = self.request.user
+        
+        try:
+            sessions = Session.objects.filter(host=user)
+            return sessions
+        except:
+            return []
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        user = self.request.user
+        try:
+            context['sessionsAttending'] = Session.objects.filter(attendees=user).exclude(host=user)
+            
+        except:
+            context['sessionsAttending'] = []
+        return context
+
+def deleteSession(request):
+    if request.method == "POST":
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
+
+def withdrawSession(request):
+    user = request.user
+    if request.method == "POST":
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.attendees.remove(user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
