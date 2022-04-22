@@ -40,7 +40,6 @@ def logoutView(request):
 @login_required
 def profile(request):
     prof, created = Profile.objects.get_or_create(user=request.user)
-    messages.success(request, request.user)
     coursesEnrolledIn = request.user.profile.courses.all()
     if request.method == 'POST':
     #     name = request.POST.get('coursesid')
@@ -55,7 +54,6 @@ def profile(request):
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
         if profile_form.is_valid():
             profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
             return redirect(to='profiles:users-profile')
     elif request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)

@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from profiles.models import Course
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-
+from django.contrib import messages
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
@@ -62,7 +62,7 @@ class SessionPostView(generic.ListView):
     template_name = 'studybud/sessionSubmit.html'
     context_object_name = 'session_list'
     session_list = Session.objects.all()
- 
+    
      
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -74,7 +74,6 @@ class SessionPostView(generic.ListView):
         print("!!!")
         context['courses'] = courses
         return context
-        return context
 
     def get_queryset(self):
         """
@@ -82,7 +81,14 @@ class SessionPostView(generic.ListView):
         published in the future).
         """
         return Session.objects.all()
-    
+
+    def get(self, *args, **kwargs):
+        user = self.request.user
+        if (len(user.profile.courses.all())==0):
+             messages.error(self.request,"Please add the courses you're enrolled in to your profile first.")
+             return HttpResponseRedirect(reverse("profiles:users-profile"))
+        return super(SessionPostView, self).get(*args, **kwargs) 
+        # Source: https://stackoverflow.com/questions/44357028/how-to-use-redirect-at-listview-on-django
 
 
 class SessionDetailView(generic.DetailView):
@@ -140,6 +146,7 @@ class mySessionsListView(LoginRequiredMixin,generic.ListView):
 
 def deleteSession(request):
     if request.method == "POST":
+        print(request.POST['sessionid'])
         session = Session.objects.get(id=request.POST['sessionid'])
         session.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
