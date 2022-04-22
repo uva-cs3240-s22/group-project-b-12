@@ -48,3 +48,60 @@ def sessionListView(request):
             sessions = Session.objects.filter(course=request.POST['course'])
 
     return render(request, 'studybud/sessions.html', {'sessions_list': sessions, 'courses' : courses} )
+
+    {% extends 'studybud/base.html' %}
+{% block content %}
+    {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
+    <div class="d-grid gap-2 d-md-block text-center">
+        <h1 class="text-center" style="margin-bottom: 25px;">My Sessions</h1>
+        <a class="btn btn-primary " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">+ New Session</a>
+    </div>
+    {% if session_list %}
+        <div class="row justify-content-center">
+            <div class="col-5">
+                 {% comment %} <div class="text-center">
+                    <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
+                        {% csrf_token %}
+                        <select id="course" name="course"  >
+                            <option value="all" selected>All</option>
+                            {% for course in courses %}
+                                <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
+                            {% endfor %}
+                        </select>
+                        <button type="submit" value="Submit">Submit</button>
+                    </form> 
+                </div> {% endcomment %}
+                {% for session in session_list %}
+                    <div class="row session"
+                         onclick="location.href='{% url 'sessionDetail' session.id %}'">
+                        <div class="row">
+                            <div class="col">
+                                <h4>{{ session.course }}</h4>
+                            </div>
+                            <div class="col-7">
+                                <p class="text-center">
+                                    {{ session.date }} @ {{ session.location }}
+                                </p>
+                            </div>
+                            <div class="col-2">
+                                <form name="delete" method="post" action="{% url 'deleteSession' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="sessionid" value={{session.id}} />
+                                    <input class="btn btn-primary float-end btn-danger" type="submit" value="Delete"/>
+                                </form>
+                            </div>
+                           
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <br>
+            <p class="text-center">
+                There are currently no scheduled study sessions.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
