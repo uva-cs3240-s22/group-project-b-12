@@ -178,3 +178,9 @@ def sendMessageGeneral(request):
     return render(request, 'profiles/sendMsg.html', context)
         
   
+def removeCourse(request):
+    user = request.user
+    if request.method == "POST":
+        course = Course.objects.get(id=request.POST['courseid'])
+        user.profile.courses.remove(course)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
