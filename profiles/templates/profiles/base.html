@@ -22,9 +22,9 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="/">Home</a>
+          <a class="nav-item nav-link" href="{% url 'studySpots' %}">Find a Study Spot</a>
           <a class="nav-item nav-link" href="{% url 'submitSession' %}">New Session</a>
-          <a class="nav-item nav-link" href="#">My Sessions</a>
-          <a class="nav-item nav-link" href="{% url 'profiles:sendMessageGeneral' %}">Contact a User</a>
+          <a class="nav-item nav-link" href="{% url 'mySessions' %}">My Sessions</a>
         </div>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
