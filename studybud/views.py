@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from studybud.models import Session
+from studybud.models import Spot
 from django.utils import timezone
 from django.views import generic
 from django.urls import reverse
@@ -116,7 +117,16 @@ def SessionSignUp(request):
         print("hello")
     #print(session.id)
     return redirect("/")
-
+    
+class studySpots(generic.ListView):
+    template_name='studybud/studySpots.html'
+    context_object_name = 'spot_list'
+    #session_list = Session.objects.all()
+                                    #objects.filter(date__gte=timezone.now())
+    spot_list = Spot.objects.all()
+    def get_queryset(self):
+        return Spot.objects.all()
+      
 class mySessionsListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
@@ -157,3 +167,4 @@ def withdrawSession(request):
         session = Session.objects.get(id=request.POST['sessionid'])
         session.attendees.remove(user)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
+
