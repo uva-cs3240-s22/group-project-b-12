@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from profiles.models import Course
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-
+from django.contrib import messages
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
@@ -63,7 +63,7 @@ class SessionPostView(generic.ListView):
     template_name = 'studybud/sessionSubmit.html'
     context_object_name = 'session_list'
     session_list = Session.objects.all()
- 
+    
      
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -75,7 +75,6 @@ class SessionPostView(generic.ListView):
         print("!!!")
         context['courses'] = courses
         return context
-        return context
 
     def get_queryset(self):
         """
@@ -83,7 +82,14 @@ class SessionPostView(generic.ListView):
         published in the future).
         """
         return Session.objects.all()
-    
+
+    def get(self, *args, **kwargs):
+        user = self.request.user
+        if (len(user.profile.courses.all())==0):
+             messages.error(self.request,"Please add the courses you're enrolled in to your profile first.")
+             return HttpResponseRedirect(reverse("profiles:users-profile"))
+        return super(SessionPostView, self).get(*args, **kwargs) 
+        # Source: https://stackoverflow.com/questions/44357028/how-to-use-redirect-at-listview-on-django
 
 
 class SessionDetailView(generic.DetailView):
@@ -111,7 +117,6 @@ def SessionSignUp(request):
         print("hello")
     #print(session.id)
     return redirect("/")
-
     
 class studySpots(generic.ListView):
     template_name='studybud/studySpots.html'
@@ -121,3 +126,45 @@ class studySpots(generic.ListView):
     spot_list = Spot.objects.all()
     def get_queryset(self):
         return Spot.objects.all()
+      
+class mySessionsListView(LoginRequiredMixin,generic.ListView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
+    template_name='studybud/mySessions.html'
+    context_object_name = 'session_list'
+
+    def get_queryset(self, **kwargs):
+        user = self.request.user
+        
+        try:
+            sessions = Session.objects.filter(host=user)
+            return sessions
+        except:
+            return []
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        user = self.request.user
+        try:
+            context['sessionsAttending'] = Session.objects.filter(attendees=user).exclude(host=user)
+            
+        except:
+            context['sessionsAttending'] = []
+        return context
+
+def deleteSession(request):
+    if request.method == "POST":
+        print(request.POST['sessionid'])
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
+
+def withdrawSession(request):
+    user = request.user
+    if request.method == "POST":
+        session = Session.objects.get(id=request.POST['sessionid'])
+        session.attendees.remove(user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
+

@@ -6,6 +6,14 @@
 
 {% load socialaccount %}
 
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+  {% endfor %}
+{% endif %}
+
 {% comment %} Source: https://dev.to/earthcomfy/django-user-profile-3hik {% endcomment %}
 <div class="row justify-content-center text-center">
     <div class="col-5">
@@ -27,10 +35,27 @@
         </div>
     </div>
 </div>
-<h3> Classes Enrolled In </h3>
-{% for course in courses%}
-  <p>{{course.subject}} {{course.catalog_number}}</p>
-{% endfor %}
+<br></br>
+<h3 class="text-center"> Classes Enrolled In: </h3>
+
+{% if coursesEnrolledIn %}
+  <ul class="list-group">
+  {% for course in coursesEnrolledIn%}
+  <li class="list-group-item">
+    <p>{{course.subject}} {{course.catalog_number}}</p>
+    <form name="delete" method="post" action="{% url 'profiles:removeCourse' %}">
+      {% csrf_token %}
+      <input type="hidden" name="courseid" value={{ course.id }} />
+      <input class="btn btn-primary float-end btn-danger"
+             type="submit"
+             value="Remove"/>
+    </form>
+  </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  You are currently not enrolled in any courses.
+{%endif%}
 
  <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
  <div class="row justify-content-center text-center"></div>
