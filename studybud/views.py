@@ -85,9 +85,13 @@ class SessionPostView(generic.ListView):
 
     def get(self, *args, **kwargs):
         user = self.request.user
-        if (len(user.profile.courses.all())==0):
-             messages.error(self.request,"Please add the courses you're enrolled in to your profile first.")
-             return HttpResponseRedirect(reverse("profiles:users-profile"))
+        try:
+            if (len(user.profile.courses.all())==0):
+                messages.error(self.request,"Please add the courses you're enrolled in to your profile first.")
+                return HttpResponseRedirect(reverse("profiles:users-profile"))
+        except:
+                messages.error(self.request,"Please add the courses you're enrolled in to your profile first.")
+                return HttpResponseRedirect(reverse("profiles:users-profile"))
         return super(SessionPostView, self).get(*args, **kwargs) 
         # Source: https://stackoverflow.com/questions/44357028/how-to-use-redirect-at-listview-on-django
 
