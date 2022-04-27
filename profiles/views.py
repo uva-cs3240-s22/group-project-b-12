@@ -92,7 +92,6 @@ def profile(request):
                             meeting_time_end =i[10],
                             term = i[11],
                             term_desc = i[12]  
-
                         )
                         #subject, catalog number, class number, class title, instructor 
                         course_display.add((i[8],i[9]))
@@ -101,6 +100,7 @@ def profile(request):
                 num = 0
                 error_message = str(name[0]) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                 messages.warning(request, error_message)
+
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'coursesEnrolledIn': coursesEnrolledIn}) 
         else: 
