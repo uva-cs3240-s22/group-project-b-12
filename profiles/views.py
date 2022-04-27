@@ -74,7 +74,7 @@ def profile(request):
         if name is not None and name != '': 
             try: 
                 name = name.split()
-                subj = name[0]
+                subj = name[0].upper()
                 num = name[1]
                 courses = data['class_schedules']['records']
                 course_display = set()
