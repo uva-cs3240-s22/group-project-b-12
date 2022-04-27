@@ -99,8 +99,8 @@ def profile(request):
                         courses_data.save()
             except: 
                 num = 0
-                error_message = str(name) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
-                messages.error(request, error_message)
+                error_message = str(name[0]) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                messages.warning(request, error_message)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'coursesEnrolledIn': coursesEnrolledIn}) 
         else: 
