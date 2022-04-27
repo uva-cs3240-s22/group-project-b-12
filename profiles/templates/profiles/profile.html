@@ -90,10 +90,24 @@
   <!-- {% endfor %} -->
 </div>
 {% else %}
-<br>
+<!-- <br>
 <p class="text-center">
     No classes added currently.
-</p>
+</p> -->
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %} 
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+  {% endif %}
+{% endfor %}
+  </ul>
+{% endif %}
 {% endif %}
 
 </div>
