@@ -69,34 +69,38 @@ def profile(request):
 
         print(name)
         if name is not None and name != '': 
-            name = name.split()
-            subj = name[0]
-            num = name[1]
-            courses = data['class_schedules']['records']
-            course_display = set()
-            for i in courses: 
-                if i[0] == subj and i[1] == num and i[3] not in course_display:
-                #put this in a conditional 
-                    courses_data = Courses(
-                        subject= i[0],
-                        catalog_number = i[1],
-                        class_section = i[2],
-                        class_number = i[3],
-                        class_title = i[4],
-                        class_topic_formal_desc = i[5],
-                        instructor = i[6],
-                        enrollment_capacity = i[7],
-                        meeting_days = i[8],
-                        meeting_time_start = i[9],
-                        meeting_time_end =i[10],
-                        term = i[11],
-                        term_desc = i[12]  
-                    
-                    )
-                    #subject, catalog number, class number, class title, instructor 
-                    course_display.add(i[3])
-                    courses_data.save()
-            print(course_display)
+            try: 
+                name = name.split()
+                subj = name[0].upper()
+                num = name[1]
+                courses = data['class_schedules']['records']
+                course_display = set()
+                for i in courses: 
+                    if i[0] == subj and i[1] == num and (i[8],i[9]) not in course_display:
+                    #put this in a conditional 
+                        courses_data = Courses(
+                            subject= i[0],
+                            catalog_number = i[1],
+                            class_section = i[2],
+                            class_number = i[3],
+                            class_title = i[4],
+                            class_topic_formal_desc = i[5],
+                            instructor = i[6],
+                            enrollment_capacity = i[7],
+                            meeting_days = i[8],
+                            meeting_time_start = i[9],
+                            meeting_time_end =i[10],
+                            term = i[11],
+                            term_desc = i[12]  
+
+                        )
+                        #subject, catalog number, class number, class title, instructor 
+                        course_display.add((i[8],i[9]))
+                        courses_data.save()
+            except: 
+                num = 0
+                error_message = str(name) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                messages.error(request, error_message)
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'coursesEnrolledIn': coursesEnrolledIn}) 
         else: 
