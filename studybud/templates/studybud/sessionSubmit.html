@@ -3,6 +3,24 @@
 {% block content %}
 {% load socialaccount %}
 
+<style>
+    input{
+        color:#808080;
+        text-shadow: 0px 0px #808080;
+    }
+    label{
+    color:#000000;
+    text-shadow: 0px 0px #808080;
+    }
+    option{
+    color:#000000;
+    text-shadow: 0px 0px #808080;
+    }
+    select{
+    color:#808080;
+    text-shadow: 0px 0px #808080;
+    }
+</style>
 
     <div class="container">
         <div class="row justify-content-center mt-4">
@@ -40,11 +58,12 @@
                                   rows
                                   6
                                   placeholder="Details"></textarea>
-                        <small id="maxcharacter" class="form-text">Maximum of 250 characters.</small>
+                        <small id="maxcharacter" class="form-text" style="color:#000000;text-shadow: 0px 0px #808080;">Maximum of 250 characters.</small>
                     </div>
                     <label for="courses">Choose a course:</label>
                     <select id="course" name="course">
                         {% for course in courses %}
+                        {
                              <option value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>
                             
                         {% endfor %}
@@ -56,7 +75,9 @@
                                value={{user.email}}>
                         <br>
                     </div>
+                    <center>
                     {% buttons submit='Submit' %}
+                        </center>
                 {% endbuttons %}
             </form>
         </div>

@@ -6,6 +6,14 @@
 
 {% load socialaccount %}
 
+<head>
+<style>
+label{
+    font-size: 30px;
+}
+</style>
+</head>
+
 {% if messages %}
   {% for message in messages %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
@@ -20,6 +28,12 @@
   {% endfor %}
 {% endif %}
 
+<h1>
+    <center>
+        {{user.username}}'s Profile
+    </center>
+</h1>
+
 {% comment %} Source: https://dev.to/earthcomfy/django-user-profile-3hik {% endcomment %}
 <div class="row justify-content-center text-center">
     <div class="col-5">
@@ -31,29 +45,52 @@
                         <label></label> {{ profile_form.user }}
                     </div>
                     <div >
-                        <label>Bio:</label> {{ profile_form.bio }}
+                        <label>Tell us about yourself!</label> {{ profile_form.bio }}
                     </div>
                 </div>
                 <br><br>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-light">Save Changes</button>
             </form>
         </div>
     </div>
 </div>
 <br></br>
-<h3 class="text-center"> Classes Enrolled In: </h3>
+
+
+ <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
+<center>
+ <div class="row justify-content-center text-center"></div>
+ <div class="form-row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="small mb-1" >Search to add classes to your Profile</label>
+                <br>
+                 <form method="GET">
+                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
+                      <button type = "submit" class = "btn-light btn-sm">Search for Class</button>
+                 </form>
+                </div>
+
+            </div>
+  </div>
+</center>
+
+<br><br>
+
+<h3 class="text-center"> Your Classes </h3>
 
 {% if coursesEnrolledIn %}
-  <ul class="list-group">
+  <ul class="list-group; row justify-content-center text-center">
   {% for course in coursesEnrolledIn%}
-  <li class="list-group-item">
+  <li class="list-group-item"; style="max-height: 33% ; max-width: 32%">
     <p>{{course.subject}} {{course.catalog_number}}</p>
     <form name="delete" method="post" action="{% url 'profiles:removeCourse' %}">
       {% csrf_token %}
       <input type="hidden" name="courseid" value={{ course.id }} />
       <input class="btn btn-primary float-end btn-danger"
              type="submit"
-             value="Remove"/>
+             value="Remove Class"
+      />
     </form>
   </li>
   {% endfor %}
@@ -62,23 +99,7 @@
   You are currently not enrolled in any courses.
 {%endif%}
 
- <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
- <div class="row justify-content-center text-center"></div>
- <div class="form-row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="small mb-1">Add your classes</label>
-                <br>
-                 <form method="GET">
-                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
-                      <button type = "submit" class = "btn-light btn-sm">Search for Class</button>
-                 </form>  
-                </div>
-                
-            </div>
-  </div>  
-</div>
-</div> 
+
 <br><br>
 {% if all_classes %}
 <div class="row">
@@ -101,7 +122,7 @@
             <input type="hidden" name="courseSubject" value={{course.subject}} />
             <input type="hidden" name="courseCatNum" value={{course.catalog_number}} />
             <input type="hidden" name="user" value={{User}} />
-            <input class="btn btn-primary float-end" type="submit" value="Add Class"/>
+            <input class="btn btn-light float-end" type="submit" value="Add Class"/>
         </form>
           {% comment %} <a href="/profiles/{{courses.id}}"
 

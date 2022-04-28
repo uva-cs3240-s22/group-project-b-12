@@ -1,7 +1,43 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <style>
+    {% comment %} Source for all style code: https://www.w3schools.com/ {% endcomment %}
+  * {font-family:Franklin Gothic;}
+  * {color:white;}
 
+    a:link {
+    color:#080808;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+  a:visited {
+    color:#080808;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color:#000000;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  a:active {
+    color:#000000;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  h1{
+  text-shadow: 0.25px 0.25px #808080;
+  }
+  h2{
+  text-shadow: 0.25px 0.25px #808080;
+  }
+
+    </style>
     {% load static %}
     {% load socialaccount %}
 
@@ -14,7 +50,7 @@
 
     <title>Home</title>
   </head>
-  <body>
+  <body style="background:#FBE8A6">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Studybuddies</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +65,7 @@
         </div>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user.first_name }} {{user.last_name}}</a>
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ user.username}}</a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="/profiles/profile">Profile</a></li>
                 <li><a class="dropdown-item" href="/profiles/logout">Logout</a></li>
@@ -38,6 +74,7 @@
       </div>
     </nav>
     <div class="mt-5">
+
       {% block content %}
       {% endblock %}
     </div>
