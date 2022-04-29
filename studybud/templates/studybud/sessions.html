@@ -1,12 +1,25 @@
 {% extends 'studybud/base.html' %}
 {% block content %}
+<style>
+h1{
+    text-shadow: 1px 1px #808080;
+    font-size: 70px;
+    }
+    p{
+    font-size: 30px;
+    text-shadow: 0.25px 0.25px #808080;
+    }
+    a{
+
+    }
+</style>
     {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <div class="d-grid gap-2 d-md-block text-center">
-        <h1 class="text-center" style="margin-bottom: 25px;">Home</h1>
-        <a class="btn btn-primary " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">+ New Session</a>
+        <h1 class="text-center" style="margin-bottom: 25px;">Welcome, {{user.username}}</h1>
+        <a class="btn btn-light " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Find a New Session</a>
     </div>
     {% if session_list %}
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" >
             <div class="col-5">
                  <div class="text-center">
                     <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
@@ -37,7 +50,7 @@
                                 <form name="signUp" method="post" action="{% url 'signUp' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="sessionid" value={{session.id}} />
-                                    <input class="btn btn-primary float-end" type="submit" value="Sign up"/>
+                                    <input class="btn btn-dark float-end" type="submit" value="Sign up"/>
                                 </form>
                             </div>
                            

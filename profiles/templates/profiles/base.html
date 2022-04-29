@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-
+    <style>
+  * {font-family:Franklin Gothic;}
+    </style>
     {% load static %}
     {% load socialaccount %}
 
@@ -11,11 +13,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Base HTML</title>
+    <title>Profile</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Studybud</a>
+  {% comment %} Source: https://www.w3schools.com/ {% endcomment %}
+    <body style="background-color:#FBE8A6;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+      <a class="navbar-brand" href="#">Studybuddies</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
