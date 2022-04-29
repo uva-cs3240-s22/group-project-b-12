@@ -143,7 +143,7 @@ def sendMessage(request, user_id):
                 pass
 
             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-            email_subject = f'Studybud: New Message from {useri.email}: {form.cleaned_data["subject"]}'
+            email_subject = f'Studybud: New Message from {useri.email}: {form.cleaned_data["subject"]}' #TODO: Make useri the sender
             email_message = form.cleaned_data['message']
             from_email = "b12studybud@gmail.com"
             to_email = "anjesat@outlook.com"
