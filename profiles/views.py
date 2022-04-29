@@ -159,26 +159,26 @@ def sendMessage(request, user_id):
     return render(request, 'profiles/sendMsg.html', context)
 
 # To send email with no user parameter
-def sendMessageGeneral(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
+# def sendMessageGeneral(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             form.save()
 
-            SENDGRID_API_KEY = env('SENDGRID_API_KEY') 
+#             SENDGRID_API_KEY = env('SENDGRID_API_KEY') 
 
-            sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-            email_subject = f'Studybud: New Message from {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
-            email_message = form.cleaned_data['message']
-            from_email = Email("jmj6ry@virginia.edu")
-            to_email = [form.cleaned_data["email"]]
-            mail = Mail(from_email, to_email, email_subject, email_message)
-            sg.client.mail.send.post(request_body=mail.get())
-            return render(request, 'profiles/emailSent.html')
+#             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
+#             email_subject = f'Studybud: New Message from {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
+#             email_message = form.cleaned_data['message']
+#             from_email = Email("jmj6ry@virginia.edu")
+#             to_email = [form.cleaned_data["email"]]
+#             mail = Mail(from_email, to_email, email_subject, email_message)
+#             sg.client.mail.send.post(request_body=mail.get())
+#             return render(request, 'profiles/emailSent.html')
 
-    form = ContactForm()
-    context = {'form': form}
-    return render(request, 'profiles/sendMsg.html', context)
+#     form = ContactForm()
+#     context = {'form': form}
+#     return render(request, 'profiles/sendMsg.html', context)
         
   
 def removeCourse(request):
