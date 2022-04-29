@@ -37,8 +37,9 @@ def logoutView(request):
     return redirect("/")
 
 # Source: https://dev.to/earthcomfy/django-user-profile-3hik
-@login_required
 def profile(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
     prof, created = Profile.objects.get_or_create(user=request.user)
     coursesEnrolledIn = request.user.profile.courses.all()
     if request.method == 'POST':
@@ -110,6 +111,7 @@ def profile(request):
         
         return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'coursesEnrolledIn': coursesEnrolledIn})
 
+
 def addCourse(request):
     if request.method == 'POST':
         courseInstructor = request.POST['courseInstructor']
@@ -127,11 +129,15 @@ def addCourse(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
 
 def viewProfile(request, user_id):
+    if not request.user.is_authenticated:
+        return redirect("/")
     useri = get_object_or_404(User, pk=user_id)
     return render(request, 'profiles/viewProfile.html', {'userInfo': useri})
 
 # To send email with user parameter
 def sendMessage(request, user_id):
+    if not request.user.is_authenticated:
+        return redirect("/")
     useri = get_object_or_404(User, pk=user_id)
     if request.method == 'POST':
         form = ContactFormFilled(request.POST)
@@ -157,29 +163,6 @@ def sendMessage(request, user_id):
     form.Meta.email = useri.email
     context = {'emailRecepient': useri.email,'form': form}
     return render(request, 'profiles/sendMsg.html', context)
-
-# To send email with no user parameter
-# def sendMessageGeneral(request):
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-
-#             SENDGRID_API_KEY = env('SENDGRID_API_KEY') 
-
-#             sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
-#             email_subject = f'Studybud: New Message from {form.cleaned_data["email"]}: {form.cleaned_data["subject"]}'
-#             email_message = form.cleaned_data['message']
-#             from_email = Email("jmj6ry@virginia.edu")
-#             to_email = [form.cleaned_data["email"]]
-#             mail = Mail(from_email, to_email, email_subject, email_message)
-#             sg.client.mail.send.post(request_body=mail.get())
-#             return render(request, 'profiles/emailSent.html')
-
-#     form = ContactForm()
-#     context = {'form': form}
-#     return render(request, 'profiles/sendMsg.html', context)
-        
   
 def removeCourse(request):
     user = request.user

@@ -47,6 +47,8 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
     
 
 def postSession(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
     if request.method == "POST":
         courseID = request.POST["course"]
         coursei = Course.objects.get(id=courseID)
@@ -57,7 +59,8 @@ def postSession(request):
     else:
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
 
-class SessionPostView(generic.ListView):
+class SessionPostView(LoginRequiredMixin, generic.ListView):
+    
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
     template_name = 'studybud/sessionSubmit.html'
@@ -96,7 +99,7 @@ class SessionPostView(generic.ListView):
         # Source: https://stackoverflow.com/questions/44357028/how-to-use-redirect-at-listview-on-django
 
 
-class SessionDetailView(generic.DetailView):
+class SessionDetailView(LoginRequiredMixin, generic.DetailView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
     model = Session
@@ -112,6 +115,8 @@ def index(request):
     return render(request, 'studybud/index.html')
 
 def SessionSignUp(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
     if request.method == "POST":
         session = Session.objects.get(id=request.POST['sessionid'])
         session.attendees.add(request.user)
@@ -122,7 +127,9 @@ def SessionSignUp(request):
     #print(session.id)
     return redirect("/")
     
-class studySpots(generic.ListView):
+class studySpots(LoginRequiredMixin, generic.ListView):
+    login_url = '/profiles/'
+    redirect_field_name = 'redirect_to'
     template_name='studybud/studySpots.html'
     context_object_name = 'spot_list'
     #session_list = Session.objects.all()
@@ -159,6 +166,8 @@ class mySessionsListView(LoginRequiredMixin,generic.ListView):
         return context
 
 def deleteSession(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
     if request.method == "POST":
         print(request.POST['sessionid'])
         session = Session.objects.get(id=request.POST['sessionid'])
@@ -166,6 +175,8 @@ def deleteSession(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
 
 def withdrawSession(request):
+    if not request.user.is_authenticated:
+        return redirect("/")
     user = request.user
     if request.method == "POST":
         session = Session.objects.get(id=request.POST['sessionid'])
