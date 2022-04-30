@@ -2,10 +2,12 @@
 {% block content %}
 <style>
 h1{
+    color: black;
     text-shadow: 1px 1px #808080;
     font-size: 70px;
     }
     p{
+    color: black;
     font-size: 30px;
     text-shadow: 0.25px 0.25px #808080;
     }
@@ -16,7 +18,7 @@ h1{
     {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <div class="d-grid gap-2 d-md-block text-center">
         <h1 class="text-center" style="margin-bottom: 25px;">Welcome, {{user.username}}</h1>
-        <a class="btn btn-light " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Find a New Session</a>
+        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Find a New Session</a>
     </div>
     <div class="row justify-content-center text-center">
         <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
@@ -27,7 +29,7 @@ h1{
                     <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
                 {% endfor %}
             </select>
-            <button type="submit" value="Submit">Submit</button>
+            <button type="submit" class="btn btn-dark" value="Submit">Submit</button>
         </form> 
     </div>
     {% if session_list %}
