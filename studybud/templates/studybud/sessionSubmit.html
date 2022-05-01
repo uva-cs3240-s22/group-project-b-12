@@ -23,11 +23,21 @@ color:#000000
     color:#808080;
     text-shadow: 0px 0px #808080;
     }
+    p{
+    font-size: 15px;
+    color: black;
+    }
 </style>
 
     <div class="container">
         <div class="row justify-content-center mt-4">
             <h1 style="text-align:center;" >Post a New Session</h1>
+            <br> <br><br>
+            <center>
+                <a class="btn btn-dark " href="{% url 'studySpots' %}" role="button" style="margin-bottom: 10px;">Don't know where to host you study session? Click here to check out some of UVA's study spots!</a>
+
+            </center>
+            <br><br> <br>
             <div class="col-6 align-items-center ">
                 <form role="form" action="{% url 'postSession' %}" method = "post">
                     {% csrf_token %}
