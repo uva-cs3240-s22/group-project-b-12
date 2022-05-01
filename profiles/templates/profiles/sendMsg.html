@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {% load static %}
-
+<center>
 <link rel="stylesheet" type="text/css" href="{% static 'emailForm.css' %}">
 {% if emailRecepient == null or emailRecepient == "" %}
     <form action="" method = "post">
@@ -20,4 +20,5 @@
         <input type="submit" value="Submit">
     </form>
 {% endif %}
+    </center>
 {% endblock content %}

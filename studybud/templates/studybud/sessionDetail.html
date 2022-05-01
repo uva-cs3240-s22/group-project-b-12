@@ -1,17 +1,31 @@
 {% extends 'studybud/base.html'%}
 {% block content %}
+<style>
+    *{
+    color: black;
+    }
+    h4{
+     margin-top: 20px;
+    }
+    li{
+    margin-top: 5px;
+    }
+</style>
+<center>
 
-<h1> This Study Session</h1>
-<li class="list-group-item disabled">This Study Session:</li>
-    <ul class = "list-group">
+<h1> {{session.course}} Study Session</h1>
+        <ul class = "list-group">
         <li class ="list-group-item bg-transparent list-group-item-success">For: {{ session.course }}</a></li>
         <li class ="list-group-item bg-transparent list-group-item-success">On: {{ session.date }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">At: {{ session.location }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Location: {{ session.location }}</a></li>
         <li class ="list-group-item bg-transparent list-group-item-success">Hosted by: {{ session.host.username }}</a></li>
-        <li class ="list-group-item bg-transparent list-group-item-success">Here are additional details the creator left: {{ session.details }}</a></li>
+        <li class ="list-group-item bg-transparent list-group-item-success">Additional details: {{ session.details }}</a></li>
     </ul>
     <h4> Attendees </h4>
     {% for attendee in session.attendees.all %}
     <a href="{% url 'profiles:viewProfile' attendee.id %}">{{attendee.username}}</a><br/>
     {% endfor %}
+
+    </center>
 {% endblock %}
+

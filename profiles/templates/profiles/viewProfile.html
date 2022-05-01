@@ -1,8 +1,18 @@
 {% extends "profiles/base.html" %}
+
+
 {% block content %}
 
-<h3> {{userInfo.first_name}} {{userInfo.last_name}} </h3>
+style>
+    div.h3{
+    font-size: 150px;
+    }
+</style>
+
+<center>
+<h3> {{userInfo.username}} </h3>
 <p>{{userInfo.profile.bio}}</p>
-<a href="{% url 'profiles:sendMessage' userInfo.id%}">Contact</a><br/>
+<a href="{% url 'profiles:sendMessage' userInfo.id%}">Contact {{userInfo.username}}</a><br/>
 {% comment %} sendMessage/{{userInfo.id}} {% endcomment %}
+    </center>
 {% endblock content %}
