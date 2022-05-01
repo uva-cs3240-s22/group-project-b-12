@@ -1,11 +1,18 @@
 {% extends 'studybud/base.html' %}
 {% block content %}
+
+<style>
+    *{
+    color:black;
+    }
+</style>
+
     {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <h1 class="text-center" style="margin-bottom: 25px;">My Sessions</h1>
     <div>
     <h2 class="text-center" style="margin-bottom: 25px;">Hosting:</h2>
     <div class="d-grid gap-2 d-md-block text-center">
-        <a class="btn btn-primary " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">+ New Session</a>
+        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">+ New Session</a>
     </div>
     {% if session_list %}  
         <div class="row justify-content-center">
