@@ -56,19 +56,12 @@ h1{
                             <div class="col">
                                 <h3>{{ session.course }}</h3>
                             </div>
-                            <div class="col-7">
-                                <p class="text-center" style="font-size: 25px">
+                            <div class="col-5">
+                                <p class="text-center" style="font-size: 20px">
                                     {{ session.date }}  {{ session.location }}
                                 </p>
                             </div>
-                            <div class="col-2">
 
-                                <form name="signUp" method="post" action="{% url 'signUp' %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="sessionid" value={{session.id}} />
-                                    <input class="btn btn-dark float-end" type="submit" value="Sign up"/>
-                                </form>
-                            </div>
                            
                         </div>
                     </div>
