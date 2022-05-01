@@ -54,11 +54,11 @@ h1{
                          onclick="location.href='{% url 'sessionDetail' session.id %}'">
                         <div class="row">
                             <div class="col">
-                                <h4>{{ session.course }}</h4>
+                                <h3>{{ session.course }}</h3>
                             </div>
                             <div class="col-7">
-                                <p class="text-center">
-                                    {{ session.date }} @ {{ session.location }}
+                                <p class="text-center" style="font-size: 25px">
+                                    {{ session.date }}  {{ session.location }}
                                 </p>
                             </div>
                             <div class="col-2">
@@ -76,7 +76,7 @@ h1{
             </div>
         {% else %}
             <br>
-            <p class="text-center">
+            <p class="text-center" style="font-size: 20px">
                 There are currently no scheduled study sessions.
             </p>
         {% endif %}

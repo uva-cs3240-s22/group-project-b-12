@@ -56,26 +56,7 @@ label{
 </div>
 <br></br>
 
-<h3 class="text-center"> Your Classes </h3>
 
-{% if coursesEnrolledIn %}
-  <ul class="list-group; row justify-content-center text-center">
-  {% for course in coursesEnrolledIn%}
-  <li class="list-group-item"; style="max-height: 33% ; max-width: 32%">
-    <p>{{course.subject}} {{course.catalog_number}}</p>
-    <form name="delete" method="post" action="{% url 'profiles:removeCourse' %}">
-      {% csrf_token %}
-      <input type="hidden" name="courseid" value={{ course.id }} />
-      <input class="btn btn-primary float-end btn-danger"
-             type="submit"
-             value="Remove Class"
-      />
-    </form>
-  </li>
-  {% endfor %}
-  </ul>
-
-<br></br>
  <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
 <center>
  <div class="row justify-content-center text-center"></div>
@@ -96,14 +77,36 @@ label{
 
 <br><br>
 
+<h3 class="text-center"> Your Classes </h3>
+
+{% if coursesEnrolledIn %}
+  <ul class="list-group; row justify-content-center text-center">
+  {% for course in coursesEnrolledIn%}
+  <li class="list-group-item"; style="max-height: 33% ; max-width: 32%">
+    <p>{{course.subject}} {{course.catalog_number}}</p>
+    <form name="delete" method="post" action="{% url 'profiles:removeCourse' %}">
+      {% csrf_token %}
+      <input type="hidden" name="courseid" value={{ course.id }} />
+      <input class="btn btn-primary float-end btn-danger"
+             type="submit"
+             value="Remove Class"
+      />
+    </form>
+  </li>
+  {% endfor %}
+  </ul>
 {% else %}
+<center>
   You are currently not enrolled in any courses.
+    </center>
 {%endif%}
 
 
 <br><br>
+
 {% if all_classes %}
-<div class="row">
+
+<div class="row" style="margin-left: 5%; margin-right: 5%">
   <!-- {% for course in all_classes %}  -->
     <div class="col-md-4 col-sm-6 col-lg-3">
       <div class="card">
@@ -126,7 +129,6 @@ label{
             <input class="btn btn-light float-end" type="submit" value="Add Class"/>
         </form>
           {% comment %} <a href="/profiles/{{courses.id}}"
-
   
           ><input
             type="submit"
