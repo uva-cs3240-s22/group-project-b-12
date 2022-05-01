@@ -56,7 +56,7 @@ def postSession(request):
         else:
             sdetails = request.POST['details']
         coursei = Course.objects.get(id=courseID)
-        session = Session.objects.create(date = timezone.now(), location = request.POST['location'], details = sdetails, course=coursei, host = User.objects.get(email=request.POST['Host']))
+        session = Session.objects.create(date = request.POST['date'], location = request.POST['location'], details = sdetails, course=coursei, host = User.objects.get(email=request.POST['Host']))
         session.attendees.add(User.objects.get(email=request.POST['Host']))
         #TODO: Fix date parameter
         return HttpResponseRedirect(reverse('sessions'))
