@@ -1,15 +1,31 @@
 {% extends 'studybud/base.html' %}
 {% block content %}
+
+{%load static%}
+
 <title>Home</title>
 <style>
+    .content{
+    height: 100vh;
+    width: 100vw;
+    background-image: url({% static 'sbg.png' %});
+    background-size: contain;
+    background-repeat: repeat;
+    }
+
     h1 {
-        color: black;
+        color: BLACK;
         font-size: 70px;
+       -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
+
     }
 
     p {
         color: black;
         font-size: 30px;
+        -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
     }
 
     a {}
@@ -28,11 +44,13 @@
         margin-right: 25%;
     }
 </style>
+
+<div class="content">
 {% comment %} <li class="list-group-item bg-transparent list-group-item-success"><a
         href="{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <div class="d-grid gap-2 d-md-block text-center">
-        <h1 class="text-center" style="margin-bottom: 25px;">Available Sessions</h1>
-        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Post a New
+        <h1 class="text-center" style="margin-bottom: 25px;">Hello, {{user.username}}</h1>
+        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px; background-color: #ffffff;">Post a New
             Session</a>
     </div>
 
@@ -85,8 +103,9 @@
         </p>
         {% endif %}
         <center >
-            <a class="btn btn-dark " href="{% url 'mySessions' %}" role="button" style="margin-bottom: 10px;">View sessions you signed up for</a>
+            <a class="btn btn-dark " href="{% url 'mySessions' %}" role="button" style="margin-bottom: 10px;  background-color: #ffffff;">View sessions you signed up for</a>
         </center>
     </div>
-    {% endblock %}
-    <!-- view sessions you are enrolled in -->
+</div>
+{% endblock %}
+<!-- view sessions you are enrolled in -->
