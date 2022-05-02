@@ -25,9 +25,9 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
             courses = user.profile.courses.all()
 
             if (filter=='all'):
-                sessions = Session.objects.filter(course__in = courses).exclude(attendees=user)
+                sessions = Session.objects.filter(course__in = courses, date__gte=timezone.now()).exclude(attendees=user)
             else: 
-                sessions = Session.objects.filter(course=filter).exclude(attendees=user)
+                sessions = Session.objects.filter(course=filter, date__gte=timezone.now()).exclude(attendees=user)
 
             return sessions
         except:
