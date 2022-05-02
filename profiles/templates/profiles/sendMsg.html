@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {% load static %}
-<center>
+
 <link rel="stylesheet" type="text/css" href="{% static 'emailForm.css' %}">
 {% if emailRecepient == null or emailRecepient == "" %}
     <form action="" method = "post">
@@ -14,11 +14,35 @@
 
 {% else %}
 <h3> Send an Email to {{emailRecepient}}:</h3>
-    <form action="" method = "post">
+    <!-- <form action="" method = "post">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Submit">
+    </form> -->
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="csrfmiddlewaretoken" value="yTF5g7ceTgkwsOimKxZpuV10DG4a1TWFwQ60pneu047lPvu6kTAlNYPfYEC9G8jq">
+
+            <!-- <th> -->
+                 <label for="id_subject">Subject:</label>
+            <!-- </th>
+            <td> -->
+                
+                <input type="text" name="subject" maxlength="255" required id="id_subject">
+            <!-- </td>
+        </tr>
+        <tr>
+            <th> -->
+                <br>
+                <label for="id_message">Message:</label>
+            <!-- </th>
+            <td> --> 
+                <br>
+                <textarea name="message" cols="40" rows="10" required id="id_message"></textarea>
+            <!-- </td>
+        </tr> -->
+        <br>
+        <input type="submit" value="Submit">
     </form>
 {% endif %}
-    </center>
 {% endblock content %}
