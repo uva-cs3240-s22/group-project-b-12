@@ -1,77 +1,91 @@
 {% extends 'studybud/base.html' %}
 {% block content %}
 <style>
-h1{
-    color: black;
-    font-size: 70px;
+    h1 {
+        color: black;
+        font-size: 70px;
     }
-    p{
-    color: black;
-    font-size: 30px;
-    }
-    a{
 
+    p {
+        color: black;
+        font-size: 30px;
     }
-    *{
-    color: black;
+
+    a {}
+
+    * {
+        color: black;
     }
-    h4{
-    font-size: 15px;
-    font-family: Georgia;
-    color:#1E1E1E;
-    margin-bottom: 2%;
-    margin-top: 2%;
-    margin-left: 25%;
-    margin-right: 25%;
+
+    h4 {
+        font-size: 15px;
+        font-family: Georgia;
+        color: #1E1E1E;
+        margin-bottom: 2%;
+        margin-top: 2%;
+        margin-left: 25%;
+        margin-right: 25%;
     }
 </style>
-    {% comment %} <li class ="list-group-item bg-transparent list-group-item-success"><a href = "{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
+{% comment %} <li class="list-group-item bg-transparent list-group-item-success"><a
+        href="{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <div class="d-grid gap-2 d-md-block text-center">
-        <h1 class="text-center" style="margin-bottom: 25px;">Welcome, {{user.username}}</h1>
-        <h4> Studybuddies helps University of Virginia students find study partners and study locations, and provides a simple tool for scheduling group study sessions in order to best prepare for undergraduate presentations, assessments, and exams.</h4>
-        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Find a New Session</a>
+        <h1 class="text-center" style="margin-bottom: 25px;">Available Sessions</h1>
+        <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px;">Post a New
+            Session</a>
     </div>
 
     <div class="row justify-content-center text-center">
         <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
             {% csrf_token %}
-            <select id="course" name="course"  >
+            <select id="course" name="course">
                 <option value="all" selected>All</option>
                 {% for course in courses %}
-                    <option name ="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>                       
+                <option name="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>
                 {% endfor %}
             </select>
-            <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 20px" value="Submit">Submit</button>
-        </form> 
+            <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 20px"
+                value="Submit">Submit</button>
+        </form>
     </div>
     {% if session_list %}
-        <div class="row justify-content-center" >
-            <div class="col-5">
-                 <div class="text-center">
-                </div>
-                {% for session in session_list %}
-                    <div class="row session"
-                         onclick="location.href='{% url 'sessionDetail' session.id %}'">
-                        <div class="row">
-                            <div class="col">
-                                <h3>{{ session.course }}</h3>
-                            </div>
-                            <div class="col-5">
-                                <p class="text-center" style="font-size: 20px">
-                                    {{ session.date }}  {{ session.location }}
-                                </p>
-                            </div>
-
-                           
-                        </div>
-                    </div>
-                {% endfor %}
+    <div class="row justify-content-center">
+        <div class="col-5">
+            <div class="text-center">
             </div>
+            {% for session in session_list %}
+            <div class="row session" onclick="location.href='{% url 'sessionDetail' session.id %}'">
+                <div class="row">
+                    <div class="col-2">
+                        <h4>{{ session.course }}</h4>
+                    </div>
+                    <div class="col-7">
+                        <p class="text-center">
+                            {{ session.date }} @ {{ session.location }}
+                        </p>
+                    </div>
+                    <div class="col-2">
+
+                        <form name="signUp" method="post" action="{% url 'signUp' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="sessionid" value={{session.id}} />
+                            <input class="btn btn-dark float-end" type="submit" value="Sign up" />
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
         {% else %}
-            <br>
-            <p class="text-center" style="font-size: 20px">
-                There are currently no scheduled study sessions.
-            </p>
+        <br>
+        <p class="text-center" style="font-size: 20px">
+            There are currently no available study sessions.
+        </p>
         {% endif %}
+        <center >
+            <a class="btn btn-dark " href="{% url 'mySessions' %}" role="button" style="margin-bottom: 10px;">View sessions you signed up for</a>
+        </center>
     </div>
-{% endblock %}
+    {% endblock %}
+    <!-- view sessions you are enrolled in -->
