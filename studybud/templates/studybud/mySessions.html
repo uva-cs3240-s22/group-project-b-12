@@ -25,12 +25,12 @@
                             <div class="col-2">
                                 <h6>{{ session.course }}</h6>
                             </div>
-                            <div class="col-7">
+                            <div class="col">
                                 <p class="text-center">
                                     {{ session.date }} @ {{ session.location }}
                                 </p>
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <form name="delete" method="post" action="{% url 'deleteSession' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="sessionid" value={{session.id}} />
@@ -58,10 +58,10 @@
                         <div class="row session"
                              onclick="location.href='{% url 'sessionDetail' session.id %}'">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-2">
                                     <h4>{{ session.course }}</h4>
                                 </div>
-                                <div class="col-7">
+                                <div class="col">
                                     <p class="text-center">
                                         {{ session.date }} @ {{ session.location }}
                                     </p>
