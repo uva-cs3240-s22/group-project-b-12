@@ -56,27 +56,6 @@ label{
 </div>
 <br></br>
 
-
- <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
-<center>
- <div class="row justify-content-center text-center"></div>
- <div class="form-row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <h4>Search to add classes to your Profile.</h4>
-                <h6> Please format as SUBJECT CATALOGNUMBER (ex: CS 3240) </h6>
-                 <form method="GET">
-                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
-                      <button type = "submit" class = "btn-light btn-sm">Search for Class</button>
-                 </form>
-                </div>
-
-            </div>
-  </div>
-</center>
-
-<br><br>
-
 <h3 class="text-center"> Your Classes </h3>
 
 {% if coursesEnrolledIn %}
@@ -101,6 +80,26 @@ label{
     </center>
 {%endif%}
 
+ <!--ADD CLASS BUTTON NEEDS BOOTSTRAPPING-->
+<center>
+ <div class="row justify-content-center text-center"></div>
+ <div class="form-row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <h4>Search to add classes to your Profile</h4>
+                <br>
+                <h6> Please format as SUBJECT CATALOGNUMBER (ex: CS 3240) </h6>
+                 <form method="GET">
+                      <input type = "text" name = "name" placeholder="Search..." class = "text-center">
+                      <button type = "submit" class = "btn-light btn-sm">Search for Class</button>
+                 </form>
+                </div>
+
+            </div>
+  </div>
+</center>
+
+<br><br>
 
 <br><br>
 
@@ -114,8 +113,9 @@ label{
           <p class="card-title">{{ course.class_title }}</p>
           <hr>
           <p class="card-text"> {{ course.instructor }}</p>
-          <p class="card-text">{{ course.subject}} {{ course.catalog_number }} {{course.meeting_time_start}} - {{course.meeting_time_end}}</p>
-          <p class="card-text"> section: {{ course.class_section }} term : {{ course.term_desc}}</p>
+          <p class="card-text">{{ course.subject}} {{ course.catalog_number }}</p>
+          <p class="card-text"> section: {{ course.class_section }} term: {{course.term_desc}} </p>
+          <p class="card-text"> time: {{course.meeting_time_start}} - {{course.meeting_time_end}}</p>
           {% comment %} {% for entry in course %}
             {{entry}}
           {% endfor %}     {% endcomment %}
