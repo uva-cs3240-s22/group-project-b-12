@@ -77,7 +77,7 @@ def profile(request):
                 courses = data['class_schedules']['records']
                 course_display = set()
                 for i in courses: 
-                    if i[0] == subj and i[1] == num and (i[8],i[9]) not in course_display:
+                    if i[0] == subj and i[1] == num and (i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]) not in course_display:
                     #put this in a conditional 
                         courses_data = Courses(
                             subject= i[0],
@@ -89,20 +89,22 @@ def profile(request):
                             instructor = i[6],
                             enrollment_capacity = i[7],
                             meeting_days = i[8],
-                            meeting_time_start = i[9],
-                            meeting_time_end =i[10],
+                            meeting_time_start = timeConvert(i[9]),
+                            meeting_time_end = timeConvert(i[10]),
                             term = i[11],
                             term_desc = i[12]  
                         )
                         #subject, catalog number, class number, class title, instructor 
-                        course_display.add((i[8],i[9]))
+                        course_display.add((i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]))
                         courses_data.save()
+                        #print(course_display)
+
             except: 
                 num = 0
                 error_message = str(name[0]) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                 messages.warning(request, error_message)
 
-            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor').distinct()
+            all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor', 'term_desc', 'meeting_time_start', 'meeting_time_end').distinct()
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'all_classes': all_classes, 'coursesEnrolledIn': coursesEnrolledIn}) 
         else: 
             return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'coursesEnrolledIn': coursesEnrolledIn})
@@ -111,7 +113,20 @@ def profile(request):
         
         return render(request, 'profiles/profile.html', {'profile_form': profile_form, 'coursesEnrolledIn': coursesEnrolledIn})
 
-
+def timeConvert(ds):
+    hours, minutes, seconds = ds.split(":")
+    hours, minutes, seconds = int(hours), int(minutes), int(seconds)
+    #print(hours)
+    #print(minutes)
+    #print(seconds)
+    setting = "AM"
+    if hours > 12:
+        setting = "PM"
+        hours = hours - 12
+    #print(hours)
+    #print(minutes)
+    #print(("%02d:%02d" + setting) % (hours, minutes))
+    return (("%02d:%02d" + setting) % (hours, minutes)) 
 def addCourse(request):
     if request.method == 'POST':
         courseInstructor = request.POST['courseInstructor']
