@@ -12,7 +12,13 @@
     background-size: contain;
     background-repeat: repeat;
     }
-
+    body{
+    height: 100vh;
+    width: 100vw;
+    background-image: url({% static 'sbg.png' %});
+    background-size: cover;
+    background-repeat: repeat;
+    }
     h1 {
         color: BLACK;
         font-size: 70px;
@@ -49,7 +55,7 @@
 {% comment %} <li class="list-group-item bg-transparent list-group-item-success"><a
         href="{% url 'submitSession' %}">Post a study Session</a> {% endcomment %}
     <div class="d-grid gap-2 d-md-block text-center">
-        <h1 class="text-center" style="margin-bottom: 25px;">Hello, {{user.username}}</h1>
+        <h1 class="text-center" style="margin-bottom: 25px; padding-top: 5%;">Hello, {{user.username}}</h1>
         <a class="btn btn-dark " href="{% url 'submitSession' %}" role="button" style="margin-bottom: 10px; background-color: #ffffff;">Post a New
             Session</a>
     </div>
