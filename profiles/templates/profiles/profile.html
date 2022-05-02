@@ -114,8 +114,8 @@ label{
           <p class="card-title">{{ course.class_title }}</p>
           <hr>
           <p class="card-text"> {{ course.instructor }}</p>
-          <p class="card-text">{{ course.subject}} {{ course.catalog_number }}</p>
-          <p class="card-text"> section: {{ course.class_section }}</p>
+          <p class="card-text">{{ course.subject}} {{ course.catalog_number }} {{course.meeting_time_start}} {{course.meeting_time_end}}</p>
+          <p class="card-text"> section: {{ course.class_section }} term : {{ course.term_desc}}</p>
           {% comment %} {% for entry in course %}
             {{entry}}
           {% endfor %}     {% endcomment %}
