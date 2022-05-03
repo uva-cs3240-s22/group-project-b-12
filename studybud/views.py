@@ -84,6 +84,8 @@ class SessionPostView(LoginRequiredMixin, generic.ListView):
         print(courses)
         print("!!!")
         context['courses'] = courses
+        nowt = datetime.now().strftime("%Y-%m-%dT%H:%M")
+        context['nowt'] = nowt
         return context
 
     def get_queryset(self):
