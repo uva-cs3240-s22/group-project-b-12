@@ -132,9 +132,12 @@ def timeConvert(ds):
     #print(minutes)
     #print(seconds)
     setting = "AM"
+    if hours == 12: 
+        setting = 'PM '
     if hours > 12:
         setting = "PM"
         hours = hours - 12
+
     #print(hours)
     #print(minutes)
     #print(("%02d:%02d" + setting) % (hours, minutes))
