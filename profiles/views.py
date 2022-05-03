@@ -55,6 +55,8 @@ def profile(request):
         profile_form = UpdateProfileForm(request.POST, request.FILES, instance=prof)
         if profile_form.is_valid():
             profile_form.save()
+            saved_message = "Your changes have been saved"
+            messages.success(request, saved_message)
             return redirect(to='profiles:users-profile')
     elif request.method == 'GET':
         profile_form = UpdateProfileForm(instance=request.user.profile)
