@@ -59,6 +59,7 @@ def postSession(request):
         session = Session.objects.create(date = request.POST['date'], location = request.POST['location'], details = sdetails, course=coursei, host = User.objects.get(email=request.POST['Host']))
         session.attendees.add(User.objects.get(email=request.POST['Host']))
         #TODO: Fix date parameter
+        messages.success(request,"Your session has been created! View it in the My Sessions Page.")
         return HttpResponseRedirect(reverse('sessions'))
     else:
         return render(request, 'polls/sessions.html', {'error': 'method is not post'} )
