@@ -24,7 +24,7 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
             filter = self.request.GET.get('course', 'all')
             courses = user.profile.courses.all()
 
-            if (filter=='all'):
+            if (filter=='all' or filter=="Select a Course"):
                 sessions = Session.objects.filter(course__in = courses).exclude(attendees=user)
             else: 
                 sessions = Session.objects.filter(course=filter).exclude(attendees=user)

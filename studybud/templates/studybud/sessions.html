@@ -76,7 +76,8 @@
         <form role="form" name="selectCourse" method="get" action="{% url 'sessions' %}">
             {% csrf_token %}
             <select id="course" name="course">
-                <option value="all" selected>All</option>
+                <option value="all" selected>Select a Course</option>
+                <option value="all">All</option>
                 {% for course in courses %}
                 <option name="course" value={{course.id}}>{{course.subject}} {{course.catalog_number}}</option>
                 {% endfor %}
