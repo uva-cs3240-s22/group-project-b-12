@@ -124,6 +124,8 @@ def SessionSignUp(request):
     if request.method == "POST":
         session = Session.objects.get(id=request.POST['sessionid'])
         session.attendees.add(request.user)
+        session_added = 'You have successfully signed up for this session. View it in the My Sessions Page'
+        messages.warning(request, session_added)
         print("works")
     # session = request.POST['signUp']
     if request.method != "POST":
