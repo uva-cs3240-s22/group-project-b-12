@@ -10,6 +10,7 @@ from profiles.models import Course
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.contrib import messages
+from datetime import datetime
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
@@ -25,9 +26,10 @@ class sessionListView(LoginRequiredMixin,generic.ListView):
             courses = user.profile.courses.all()
 
             if (filter=='all' or filter=="Select a Course"):
-                sessions = Session.objects.filter(course__in = courses).exclude(attendees=user)
+                now = datetime.now()
+                sessions = Session.objects.filter(course__in = courses,  date__gte=now).exclude(attendees=user)
             else: 
-                sessions = Session.objects.filter(course=filter).exclude(attendees=user)
+                sessions = Session.objects.filter(course=filter, date__gte=now).exclude(attendees=user)
 
             return sessions
         except:
@@ -155,7 +157,8 @@ class mySessionsListView(LoginRequiredMixin,generic.ListView):
         user = self.request.user
         
         try:
-            sessions = Session.objects.filter(host=user)
+            now = datetime.now()
+            sessions = Session.objects.filter(host=user, date__gte=now)
             return sessions
         except:
             return []
@@ -166,7 +169,8 @@ class mySessionsListView(LoginRequiredMixin,generic.ListView):
         # Add in a QuerySet of all the books
         user = self.request.user
         try:
-            context['sessionsAttending'] = Session.objects.filter(attendees=user).exclude(host=user)
+            now = datetime.now()
+            context['sessionsAttending'] = Session.objects.filter(attendees=user, date__gte=now).exclude(host=user)
             
         except:
             context['sessionsAttending'] = []
