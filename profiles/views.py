@@ -197,6 +197,9 @@ def removeCourse(request):
         course = Course.objects.get(id=request.POST['courseid'])
         user.profile.courses.remove(course)
         Session.objects.filter(host=user, course=course).delete()
-        # Session.objects.filter(attendees=user).remove(user)
+        sessions = Session.objects.filter(course=course, attendees=user).values_list('id', flat=True)
+        Session.attendees.through.objects \
+            .filter(session_id__in = sessions) \
+            .delete()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
