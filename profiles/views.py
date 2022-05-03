@@ -104,15 +104,15 @@ def profile(request):
                             courses_data.save()
                             #print(course_display)
                 else:
-                    invalid_input = str(userInput) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                    invalid_input = str(userInput) + ' is not in a valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                    # messages.error(request, invalid_input)
                 if courseFound is False: 
-                    not_found = str(userInput) + ' was not found in courses.'
+                    not_found = 'Your input: ' + '"' + str(userInput) + '"' + ' was not found in courses.'
                     messages.error(request, not_found)
             except: 
                 num = 0
                 subj = ' '
-                error_message = str(userInput) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                error_message = 'Your input: ' + '"' + str(userInput) + '"' + ' is not in a valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                 messages.error(request, error_message)
 
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor', 'term_desc', 'meeting_time_start', 'meeting_time_end').distinct()
