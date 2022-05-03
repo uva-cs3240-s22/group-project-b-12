@@ -110,6 +110,7 @@ def profile(request):
                     messages.warning(request, not_found)
             except: 
                 num = 0
+                subj = ' '
                 error_message = str(userInput) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                 messages.warning(request, error_message)
 
