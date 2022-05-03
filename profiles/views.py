@@ -18,6 +18,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.mail import send_mail
 import sendgrid
+from studybud.models import Session
 import os
 from sendgrid.helpers.mail import *
 # For django env variables. Source: https://alicecampkin.medium.com/how-to-set-up-environment-variables-in-django-f3c4db78c55f
@@ -195,4 +196,6 @@ def removeCourse(request):
     if request.method == "POST":
         course = Course.objects.get(id=request.POST['courseid'])
         user.profile.courses.remove(course)
+        Session.objects.filter(host=user).delete()
+
     return HttpResponseRedirect(request.META.get('HTTP_REFERER')) # To redirect to previous site. Source: https://stackoverflow.com/questions/12758786/redirect-return-to-same-previous-page-in-django
