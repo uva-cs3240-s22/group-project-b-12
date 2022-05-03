@@ -7,12 +7,38 @@
     h3{
     font-size: 50px;
     }
+    * {color:black;}
+
+    a:link {
+    color:#080808;
+    background-color: transparent;
+    text-decoration: none;
+    }
+
+  a:visited {
+    color:#080808;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color:#000000;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
+  a:active {
+    color:#080808;
+    background-color: transparent;
+    text-decoration: underline;
+  }
+
 </style>
 
 <center>
 <h3> {{userInfo.username}} </h3>
 <p>{{userInfo.profile.bio}}</p>
-<a href="{% url 'profiles:sendMessage' userInfo.id%}">Contact {{userInfo.username}}</a><br/>
+<a href="{% url 'profiles:sendMessage' userInfo.id%}">Click Here to Contact {{userInfo.username}}</a><br/>
 {% comment %} sendMessage/{{userInfo.id}} {% endcomment %}
     </center>
 {% endblock content %}
