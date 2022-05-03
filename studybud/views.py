@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.contrib import messages
 from datetime import datetime
+from datetime import timedelta
 class sessionListView(LoginRequiredMixin,generic.ListView):
     login_url = '/profiles/'
     redirect_field_name = 'redirect_to'
@@ -84,7 +85,8 @@ class SessionPostView(LoginRequiredMixin, generic.ListView):
         print(courses)
         print("!!!")
         context['courses'] = courses
-        nowt = datetime.now().strftime("%Y-%m-%dT%H:%M")
+        nowt = datetime.now() + timedelta(hours=1)
+        nowt = nowt.strftime("%Y-%m-%dT%H:%M")
         context['nowt'] = nowt
         return context
 
