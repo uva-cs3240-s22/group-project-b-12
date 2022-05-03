@@ -4,6 +4,7 @@
 {% load static %}
 
 <title>Send Message</title>
+<center>
 <link rel="stylesheet" type="text/css" href="{% static 'emailForm.css' %}">
 {% if emailRecepient == null or emailRecepient == "" %}
     <form action="" method = "post">
@@ -33,7 +34,7 @@
         </tr>
         <tr>
             <th> -->
-                <br>
+                <br><br>
                 <label for="id_message">Message:</label>
             <!-- </th>
             <td> --> 
@@ -44,5 +45,6 @@
         <br>
         <input type="submit" value="Submit">
     </form>
+    </center>
 {% endif %}
 {% endblock content %}
