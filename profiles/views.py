@@ -66,44 +66,51 @@ def profile(request):
         data = response.json()
     # print(data['class_schedules']['records'])
         try:
-            name = request.GET.get('name')
+            userInput = request.GET.get('name')
         except MultiValueDictKeyError:
-            name = False
+            userInput = False
 
-        print(name)
-        if name is not None and name != '': 
+        if userInput is not None and userInput != '': 
             try: 
-                name = name.split()
+                name = userInput.split()
                 subj = name[0].upper()
                 num = name[1]
-                courses = data['class_schedules']['records']
-                course_display = set()
-                for i in courses: 
-                    if i[0] == subj and i[1] == num and (i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]) not in course_display:
-                    #put this in a conditional 
-                        courses_data = Courses(
-                            subject= i[0],
-                            catalog_number = i[1],
-                            class_section = i[2],
-                            class_number = i[3],
-                            class_title = i[4],
-                            class_topic_formal_desc = i[5],
-                            instructor = i[6],
-                            enrollment_capacity = i[7],
-                            meeting_days = i[8],
-                            meeting_time_start = timeConvert(i[9]),
-                            meeting_time_end = timeConvert(i[10]),
-                            term = i[11],
-                            term_desc = i[12]  
-                        )
-                        #subject, catalog number, class number, class title, instructor 
-                        course_display.add((i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]))
-                        courses_data.save()
-                        #print(course_display)
+                if len(name) == 2:     
 
+                    courses = data['class_schedules']['records']
+                    course_display = set()
+                    courseFound = False
+                    for i in courses: 
+                        if i[0] == subj and i[1] == num and (i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]) not in course_display:
+                        #put this in a conditional 
+                            courses_data = Courses(
+                                subject= i[0],
+                                catalog_number = i[1],
+                                class_section = i[2],
+                                class_number = i[3],
+                                class_title = i[4],
+                                class_topic_formal_desc = i[5],
+                                instructor = i[6],
+                                enrollment_capacity = i[7],
+                                meeting_days = i[8],
+                                meeting_time_start = timeConvert(i[9]),
+                                meeting_time_end = timeConvert(i[10]),
+                                term = i[11],
+                                term_desc = i[12]  
+                            )
+                            courseFound = True
+                            #subject, catalog number, class number, class title, instructor 
+                            course_display.add((i[0],i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8],i[9], i[10],i[11], i[12]))
+                            courses_data.save()
+                            #print(course_display)
+                else:
+                    invalid_input = str(userInput) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                if courseFound is False: 
+                    not_found = str(userInput) + ' was not found in courses.'
+                    messages.warning(request, not_found)
             except: 
                 num = 0
-                error_message = str(name[0]) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
+                error_message = str(userInput) + ' not in valid format. Please format input as SUBJECT CATALOGNUMBER (ex: CS 3240)'
                 messages.warning(request, error_message)
 
             all_classes = Courses.objects.filter(subject =  subj , catalog_number = num).values('subject','catalog_number','class_section','class_number', 'class_title', 'instructor', 'term_desc', 'meeting_time_start', 'meeting_time_end').distinct()
