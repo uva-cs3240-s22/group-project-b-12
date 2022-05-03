@@ -50,6 +50,19 @@
         margin-right: 25%;
     }
 </style>
+{% if messages %}
+  {% for message in messages %}
+  {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+  {% else %} 
+    <div class="alert alert-danger" role="alert">
+      {{message}}
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 <div class="content">
 {% comment %} <li class="list-group-item bg-transparent list-group-item-success"><a
